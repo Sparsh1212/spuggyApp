@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'brain.dart';
 import 'issuedetail.dart';
-import 'listproj.dart';
-import 'assignedissues.dart';
+import 'bottomnavigator.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'login.dart';
+import 'popupButton.dart';
 
 class MyCreatedIssues extends StatelessWidget {
+  final bottomNavObj = BottomNavigator();
+  final popupObj = PopupButton();
   final brainObj = Brain();
   final String token;
   final dynamic profile;
@@ -19,72 +20,17 @@ class MyCreatedIssues extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Text('My Raised Issues'),
         backgroundColor: Colors.purple,
+        actions: [
+          popupObj.popupList(
+              profile[0]['name'],
+              profile[0]['branch'],
+              profile[0]['username'],
+              profile[0]['status'],
+              profile[0]['current_year'])
+        ],
       ),
-      endDrawer: Drawer(
-        child: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.all(0.0),
-            children: [
-              DrawerHeader(
-                child: Center(
-                    child: Text(
-                  'Hello User',
-                  style: TextStyle(color: Colors.white),
-                )),
-                decoration: BoxDecoration(
-                  color: Colors.purple[900],
-                ),
-              ),
-              ListTile(
-                title: Text('All Projects'),
-                onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ListProjects(
-                                token: token,
-                                profile: profile,
-                              )));
-                },
-              ),
-              ListTile(
-                title: Text('My Raised Issues'),
-                onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MyCreatedIssues(
-                                token: token,
-                                profile: profile,
-                              )));
-                },
-              ),
-              ListTile(
-                title: Text('Issues Assigned To me'),
-                onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AssignedIssues(
-                                token: token,
-                                profile: profile,
-                              )));
-                },
-              ),
-              ListTile(
-                title: Text('Members'),
-              ),
-              ListTile(
-                  title: Text('Logout'),
-                  onTap: () async {
-                    await brainObj.logout();
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => Login()));
-                  })
-            ],
-          ),
-        ),
-      ),
+      bottomNavigationBar:
+          bottomNavObj.bottomNavigator(token, profile, 1, context),
       body: FutureBuilder(
         future: brainObj.fetchMyCreatedIssues(token),
         builder: (context, snapshot) {
