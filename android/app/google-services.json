@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "84108993333",
+    "firebase_url": "https://spuggy-e045f.firebaseio.com",
+    "project_id": "spuggy-e045f",
+    "storage_bucket": "spuggy-e045f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84108993333:android:3274d15922b5df3c24627c",
+        "android_client_info": {
+          "package_name": "com.example.spuggyflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "84108993333-dfmgepg168kr4gs52bv6b9m5bhs7g4u5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg74d5p4WsQIk2W3D5Td7R-Uge-Oz8bPc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84108993333-dfmgepg168kr4gs52bv6b9m5bhs7g4u5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
