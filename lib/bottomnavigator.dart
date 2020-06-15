@@ -30,10 +30,13 @@ class BottomNavigator {
           size: 30,
           color: Colors.white,
         ),
-        Icon(
-          Icons.people,
-          size: 30,
-          color: Colors.white,
+        Visibility(
+          visible: profile[0]['status'] == 'Admin',
+          child: Icon(
+            Icons.people,
+            size: 30,
+            color: Colors.white,
+          ),
         ),
       ],
       animationDuration: Duration(milliseconds: 200),

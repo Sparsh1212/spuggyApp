@@ -4,11 +4,15 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'listproj.dart';
 
 class Login extends StatefulWidget {
+  final String message;
+  Login({@required this.message});
   @override
-  _LoginState createState() => _LoginState();
+  _LoginState createState() => _LoginState(message: message);
 }
 
 class _LoginState extends State<Login> {
+  final String message;
+  _LoginState({this.message});
   void loginFailure() {
     showDialog(
         context: context,
@@ -32,6 +36,7 @@ class _LoginState extends State<Login> {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -55,29 +60,47 @@ class _LoginState extends State<Login> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: FlatButton(
-                color: Colors.blue,
-                child: Text('Login'),
+                color: Colors.purple,
+                child: Text(
+                  'Login',
+                  style: TextStyle(color: Colors.white),
+                ),
                 onPressed: () async {
                   var username = usernameController.text;
                   var password = passwordController.text;
                   var token = await brainObj.fetchToken(username, password);
                   if (token != null) {
-                    await storage.write(key: 'token', value: token);
-
                     var profile = await brainObj.fetchProfile(token);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ListProjects(
-                                  token: token,
-                                  profile: profile,
-                                )));
+                    if (profile[0]['isBlocked'] == true) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Login(
+                                    message: 'Your Access is blocked !',
+                                  )));
+                    } else {
+                      await storage.write(key: 'token', value: token);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ListProjects(
+                                    token: token,
+                                    profile: profile,
+                                  )));
+                    }
                   } else {
                     loginFailure();
                   }
                 },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                message,
+                style: TextStyle(color: Colors.red),
               ),
             )
           ],

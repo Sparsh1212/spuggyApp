@@ -6,21 +6,20 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Brain {
-  final loginUrl = 'https://24e2ac541d70.ngrok.io/login';
-  final profileUrl = 'https://24e2ac541d70.ngrok.io/spuggy/api/UserProfile/';
-  final allProjsUrl = 'https://24e2ac541d70.ngrok.io/spuggy/api/Projects/';
-  final allIssuesUrl = 'https://24e2ac541d70.ngrok.io/spuggy/api/Issues/';
+  final base = 'https://eb7e930bc35c.ngrok.io/';
+  final loginEndPoint = 'login';
+  final profileEndPoint = 'spuggy/api/UserProfile/';
+  final allProjsEndPoint = 'spuggy/api/Projects/';
+  final allIssuesEndPoint = 'spuggy/api/Issues/';
 
-  final allCommentsUrl = 'https://24e2ac541d70.ngrok.io/spuggy/api/Comments/';
-  final myCreatedIssuesUrl =
-      'https://24e2ac541d70.ngrok.io/spuggy/api/MyCreatedIssues/';
-  final assignedIssuesUrl =
-      'https://24e2ac541d70.ngrok.io/spuggy/api/MyAssignedIssues/';
-  final profilesUrl = 'https://24e2ac541d70.ngrok.io/spuggy/api/Profiles/';
+  final allCommentsEndPoint = 'spuggy/api/Comments/';
+  final myCreatedIssuesEndPoint = 'spuggy/api/MyCreatedIssues/';
+  final assignedIssuesEndPoint = 'spuggy/api/MyAssignedIssues/';
+  final profilesEndPoint = 'spuggy/api/Profiles/';
   Future<String> fetchToken(String username, String password) async {
     print('token ka call to aay tha');
     http.Response response = await http.post(
-      loginUrl,
+      base + loginEndPoint,
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -38,7 +37,7 @@ class Brain {
   Future<dynamic> fetchProfile(String token) async {
     print('profile ka call aay tha');
     http.Response response = await http.get(
-      profileUrl,
+      base + profileEndPoint,
       headers: {HttpHeaders.authorizationHeader: 'Token $token'},
     );
     dynamic userProfile = jsonDecode(response.body);
@@ -48,7 +47,7 @@ class Brain {
 
   Future<List<dynamic>> fetchProjs(String token) async {
     http.Response response = await http.get(
-      allProjsUrl,
+      base + allProjsEndPoint,
       headers: {HttpHeaders.authorizationHeader: 'Token $token'},
     );
     dynamic projectsList = jsonDecode(response.body);
@@ -57,7 +56,7 @@ class Brain {
 
   Future<List<dynamic>> fetchIssues(String token, int projectId) async {
     http.Response response = await http.get(
-      allIssuesUrl,
+      base + allIssuesEndPoint,
       headers: {HttpHeaders.authorizationHeader: 'Token $token'},
     );
     dynamic allIssues = jsonDecode(response.body);
@@ -69,7 +68,7 @@ class Brain {
 
   Future<List<dynamic>> fetchComments(String token, int issueId) async {
     http.Response response = await http.get(
-      allCommentsUrl,
+      base + allCommentsEndPoint,
       headers: {HttpHeaders.authorizationHeader: 'Token $token'},
     );
     dynamic allComments = jsonDecode(response.body);
@@ -81,7 +80,7 @@ class Brain {
 
   Future<List<dynamic>> fetchMyCreatedIssues(String token) async {
     http.Response response = await http.get(
-      myCreatedIssuesUrl,
+      base + myCreatedIssuesEndPoint,
       headers: {HttpHeaders.authorizationHeader: 'Token $token'},
     );
     dynamic myCreatedIssuesList = jsonDecode(response.body);
@@ -90,7 +89,7 @@ class Brain {
 
   Future<List<dynamic>> fetchAssignedIssues(String token) async {
     http.Response response = await http.get(
-      assignedIssuesUrl,
+      base + assignedIssuesEndPoint,
       headers: {HttpHeaders.authorizationHeader: 'Token $token'},
     );
     dynamic assignedIssuesList = jsonDecode(response.body);
@@ -103,7 +102,7 @@ class Brain {
   }
 
   Future<int> raiseIssue(String token, dynamic obj) async {
-    http.Response response = await http.post(allIssuesUrl,
+    http.Response response = await http.post(base + allIssuesEndPoint,
         headers: {
           HttpHeaders.authorizationHeader: 'Token $token',
           'Content-Type': 'application/json',
@@ -115,7 +114,7 @@ class Brain {
   }
 
   Future<int> addComment(String token, dynamic obj) async {
-    http.Response response = await http.post(allCommentsUrl,
+    http.Response response = await http.post(base + allCommentsEndPoint,
         headers: {
           HttpHeaders.authorizationHeader: 'Token $token',
           'Content-Type': 'application/json',
@@ -127,15 +126,13 @@ class Brain {
   }
 
   Future<int> updateIssue(String token, dynamic obj, int id) async {
-    http.Response response = await http.put(
-        'https://24e2ac541d70.ngrok.io/spuggy/api/Issues/' +
-            id.toString() +
-            '/',
-        headers: {
-          HttpHeaders.authorizationHeader: 'Token $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(obj));
+    http.Response response =
+        await http.put(base + allIssuesEndPoint + id.toString() + '/',
+            headers: {
+              HttpHeaders.authorizationHeader: 'Token $token',
+              'Content-Type': 'application/json',
+            },
+            body: jsonEncode(obj));
     dynamic updatedIssue = jsonDecode(response.body);
     print(updatedIssue);
     return (response.statusCode);
@@ -143,7 +140,7 @@ class Brain {
 
   Future<dynamic> fetchProfiles(String token) async {
     http.Response response = await http.get(
-      profilesUrl,
+      base + profilesEndPoint,
       headers: {HttpHeaders.authorizationHeader: 'Token $token'},
     );
     dynamic profilesList = jsonDecode(response.body);
@@ -151,17 +148,26 @@ class Brain {
   }
 
   Future<int> updateMemberAccess(String token, dynamic obj, int id) async {
-    http.Response response = await http.put(
-        'https://24e2ac541d70.ngrok.io/spuggy/api/Profiles/' +
-            id.toString() +
-            '/',
-        headers: {
-          HttpHeaders.authorizationHeader: 'Token $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(obj));
+    http.Response response =
+        await http.put(base + profilesEndPoint + id.toString() + '/',
+            headers: {
+              HttpHeaders.authorizationHeader: 'Token $token',
+              'Content-Type': 'application/json',
+            },
+            body: jsonEncode(obj));
     dynamic updatedIssue = jsonDecode(response.body);
     print(updatedIssue);
     return (response.statusCode);
+  }
+
+  Future<dynamic> checkToken() async {
+    var storage = FlutterSecureStorage();
+    String value = await storage.read(key: 'token');
+    if (value != null) {
+      List profile = await fetchProfile(value);
+      return {'token': value, 'profile': profile};
+    } else {
+      return {'token': '', 'profile': null};
+    }
   }
 }

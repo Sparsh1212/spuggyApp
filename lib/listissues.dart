@@ -9,7 +9,10 @@ class ListIssues extends StatelessWidget {
   final brainObj = Brain();
   final int projectId;
   final String token;
-  ListIssues({@required this.token, @required this.projectId});
+  ListIssues({
+    @required this.token,
+    @required this.projectId,
+  });
 
   @override
   Widget build(BuildContext context) {

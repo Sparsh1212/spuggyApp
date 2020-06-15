@@ -81,7 +81,11 @@ class PopupButton {
             onPressed: () async {
               await brainObj.logout();
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => Login()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Login(
+                            message: 'You have been Successfully logged out',
+                          )));
             },
           ),
         ),
