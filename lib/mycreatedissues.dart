@@ -85,9 +85,10 @@ class MyCreatedIssues extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => IssueDetail(
-                                            token: token,
-                                            issue: snapshot.data[index],
-                                          )));
+                                          token: token,
+                                          issue: snapshot.data[index],
+                                          project: null,
+                                          profile: profile)));
                             },
                           ),
                         ],

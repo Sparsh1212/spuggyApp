@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:spuggyflutter/editissue.dart';
 import 'comments.dart';
+import 'editissue.dart';
 
 class IssueDetail extends StatelessWidget {
+  final dynamic project;
   final String token;
   final dynamic issue;
-  IssueDetail({@required this.token, @required this.issue});
+  final profile;
+  IssueDetail(
+      {@required this.token,
+      @required this.issue,
+      @required this.project,
+      @required this.profile});
 
   @override
   Widget build(BuildContext context) {
+    bool checkIfEditAllowed() {
+      if (project == null) {
+        return false;
+      }
+      if (profile[0]['status'] == 'Admin') {
+        return true;
+      } else if (project['created_by'] == profile[0]['username']) {
+        return true;
+      }
+      for (int i = 0; i < project['team_members'].length; i++) {
+        if (project['team_members'][i] == profile[0]['user']) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Details'),
@@ -15,16 +41,20 @@ class IssueDetail extends StatelessWidget {
       ),
       body: Center(
         child: Container(
-          height: 600.0,
+          height: 500.0,
           width: 300.0,
           child: Card(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  issue['issue_title'],
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    issue['issue_title'],
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -81,6 +111,40 @@ class IssueDetail extends StatelessWidget {
                       style: TextStyle(color: Colors.deepOrange),
                     ),
                   ],
+                ),
+                Visibility(
+                  visible: checkIfEditAllowed(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                    child: FlatButton(
+                      color: Colors.green,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.mode_edit,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(
+                            'Edit',
+                            style: TextStyle(color: Colors.white),
+                          )
+                        ],
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditIssue(
+                                      token: token,
+                                      issue: issue,
+                                    )));
+                      },
+                    ),
+                  ),
                 ),
                 FlatButton(
                   child: Text(

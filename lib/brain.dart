@@ -138,7 +138,17 @@ class Brain {
     return (response.statusCode);
   }
 
-  Future<dynamic> fetchProfiles(String token) async {
+  Future<int> deleteIssue(String token, int id) async {
+    http.Response response = await http.delete(
+      base + allIssuesEndPoint + id.toString() + '/',
+      headers: {
+        HttpHeaders.authorizationHeader: 'Token $token',
+      },
+    );
+    return (response.statusCode);
+  }
+
+  Future<List<dynamic>> fetchProfiles(String token) async {
     http.Response response = await http.get(
       base + profilesEndPoint,
       headers: {HttpHeaders.authorizationHeader: 'Token $token'},
@@ -169,5 +179,15 @@ class Brain {
     } else {
       return {'token': '', 'profile': null};
     }
+  }
+
+  Future<List<dynamic>> fetchUsers(String token) async {
+    http.Response response = await http.get(
+      base + 'spuggy/api/Users/',
+      headers: {HttpHeaders.authorizationHeader: 'Token $token'},
+    );
+    dynamic usersList = jsonDecode(response.body);
+
+    return usersList;
   }
 }

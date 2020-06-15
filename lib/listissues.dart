@@ -6,13 +6,16 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'newissue.dart';
 
 class ListIssues extends StatelessWidget {
+  final project; // new
   final brainObj = Brain();
   final int projectId;
   final String token;
-  ListIssues({
-    @required this.token,
-    @required this.projectId,
-  });
+  final profile;
+  ListIssues(
+      {@required this.token,
+      @required this.projectId,
+      @required this.project, // new
+      @required this.profile});
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +94,8 @@ class ListIssues extends StatelessWidget {
                                       builder: (context) => IssueDetail(
                                             token: token,
                                             issue: snapshot.data[index],
+                                            project: project,
+                                            profile: profile,
                                           )));
                             },
                           ),

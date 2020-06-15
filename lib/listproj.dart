@@ -88,6 +88,8 @@ class ListProjects extends StatelessWidget {
                                                 token: token,
                                                 projectId: snapshot.data[index]
                                                     ['id'],
+                                                project: snapshot.data[index],
+                                                profile: profile,
                                               )));
                                 }),
                           )

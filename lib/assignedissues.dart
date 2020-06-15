@@ -178,6 +178,8 @@ class _AssignedIssuesState extends State<AssignedIssues> {
                                       builder: (context) => IssueDetail(
                                             token: widget.token,
                                             issue: snapshot.data[index],
+                                            project: null,
+                                            profile: profile,
                                           )));
                             },
                           ),
