@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Brain {
-  final base = 'https://eb7e930bc35c.ngrok.io/';
+  final base = 'https://9334b8c36731.ngrok.io/';
   final loginEndPoint = 'login';
   final profileEndPoint = 'spuggy/api/UserProfile/';
   final allProjsEndPoint = 'spuggy/api/Projects/';

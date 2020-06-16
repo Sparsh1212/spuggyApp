@@ -2,6 +2,7 @@ import 'brain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'listproj.dart';
+import 'webview.dart';
 
 class Login extends StatefulWidget {
   final String message;
@@ -61,39 +62,57 @@ class _LoginState extends State<Login> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: FlatButton(
-                color: Colors.purple,
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () async {
-                  var username = usernameController.text;
-                  var password = passwordController.text;
-                  var token = await brainObj.fetchToken(username, password);
-                  if (token != null) {
-                    var profile = await brainObj.fetchProfile(token);
-                    if (profile[0]['isBlocked'] == true) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Login(
-                                    message: 'Your Access is blocked !',
-                                  )));
-                    } else {
-                      await storage.write(key: 'token', value: token);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ListProjects(
-                                    token: token,
-                                    profile: profile,
-                                  )));
-                    }
-                  } else {
-                    loginFailure();
-                  }
-                },
+              child: Row(
+                children: [
+                  FlatButton(
+                    color: Colors.purple,
+                    child: Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () async {
+                      var username = usernameController.text;
+                      var password = passwordController.text;
+                      var token = await brainObj.fetchToken(username, password);
+                      if (token != null) {
+                        var profile = await brainObj.fetchProfile(token);
+                        if (profile[0]['isBlocked'] == true) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Login(
+                                        message: 'Your Access is blocked !',
+                                      )));
+                        } else {
+                          await storage.write(key: 'token', value: token);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ListProjects(
+                                        token: token,
+                                        profile: profile,
+                                      )));
+                        }
+                      } else {
+                        loginFailure();
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    width: 20.0,
+                  ),
+                  FlatButton(
+                    child: Text(
+                      'Login with Omniport',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    color: Colors.purple,
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => WebView()));
+                    },
+                  )
+                ],
               ),
             ),
             Padding(
