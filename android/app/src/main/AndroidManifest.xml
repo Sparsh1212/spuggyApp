@@ -8,7 +8,10 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="Spuggy"
-        android:icon="@mipmap/spuggy">
+        android:icon="@mipmap/spuggy"
+        android:usesCleartextTraffic="true"
+        >
+        
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -141,6 +141,7 @@ class IssueDetail extends StatelessWidget {
                                 builder: (context) => EditIssue(
                                       token: token,
                                       issue: issue,
+                                      project: project,
                                     )));
                       },
                     ),

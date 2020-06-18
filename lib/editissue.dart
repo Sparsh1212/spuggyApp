@@ -5,20 +5,25 @@ import 'brain.dart';
 final brainObj = Brain();
 
 class EditIssue extends StatefulWidget {
+  final dynamic project;
   final String token;
   final dynamic issue;
-  EditIssue({@required this.issue, @required this.token});
+  EditIssue(
+      {@required this.issue, @required this.token, @required this.project});
   @override
-  _EditIssueState createState() => _EditIssueState(issue: issue, token: token);
+  _EditIssueState createState() =>
+      _EditIssueState(issue: issue, token: token, project: project);
 }
 
 class _EditIssueState extends State<EditIssue> {
   var membersList = [];
   var x = 'Created';
   var y;
+  final dynamic project;
   final dynamic issue;
   final String token;
-  _EditIssueState({@required this.issue, @required this.token});
+  _EditIssueState(
+      {@required this.issue, @required this.token, @required this.project});
   @override
   void initState() {
     super.initState();
@@ -86,6 +91,10 @@ class _EditIssueState extends State<EditIssue> {
                       titleText: 'Assign User',
                       hintText: 'Please choose one',
                       dataSource: snapshot.data
+                          .where((user) =>
+                              project['team_members'].contains(user['id']) ||
+                              project['created_by'] == user['username'])
+                          .toList()
                           .map((user) => {
                                 'display': user['username'],
                                 'value': user['id']
