@@ -21,7 +21,6 @@ class _EditIssueState extends State<EditIssue> {
   _EditIssueState({@required this.issue, @required this.token});
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     x = issue['status'];
   }

@@ -19,6 +19,7 @@ class PopupButton {
           value: 1,
           child: Container(
             height: 200.0,
+            width: 300.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -26,9 +27,12 @@ class PopupButton {
                   'Hello $name',
                   style: TextStyle(color: Colors.white),
                 ),
-                Text(
-                  branch,
-                  style: TextStyle(color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Text(
+                    branch,
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

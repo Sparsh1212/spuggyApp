@@ -65,7 +65,7 @@ class _LoginState extends State<Login> {
               child: Row(
                 children: [
                   FlatButton(
-                    color: Colors.purple,
+                    color: Colors.blue,
                     child: Text(
                       'Login',
                       style: TextStyle(color: Colors.white),

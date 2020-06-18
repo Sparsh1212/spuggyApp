@@ -30,7 +30,6 @@ class MemberSearch extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
     final resultsList = membersList
         .where((member) =>
             member['name'].toLowerCase().contains(query.toLowerCase()))

@@ -21,7 +21,7 @@ class _EditMemberState extends State<EditMember> {
   @override
   void initState() {
     super.initState();
-    // TODO: implement initState
+
     x = member['isBlocked'];
     y = member['status'];
   }

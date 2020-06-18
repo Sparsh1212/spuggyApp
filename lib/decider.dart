@@ -57,7 +57,7 @@ class Decider extends StatelessWidget {
                     height: 5.0,
                   ),
                   Text(
-                    '- The best bug tracker application',
+                    '- Bug Tracking is now simple',
                     style: TextStyle(
                         color: Colors.white, fontStyle: FontStyle.italic),
                   )

@@ -1,12 +1,11 @@
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Brain {
-  final base = 'https://9334b8c36731.ngrok.io/';
+  final base = 'http://spuggy.herokuapp.com/';
   final loginEndPoint = 'login';
   final profileEndPoint = 'spuggy/api/UserProfile/';
   final allProjsEndPoint = 'spuggy/api/Projects/';
