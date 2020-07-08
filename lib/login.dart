@@ -103,7 +103,7 @@ class _LoginState extends State<Login> {
                   ),
                   FlatButton(
                     child: Text(
-                      'Login with Omniport',
+                      'Login with OMNIPORT',
                       style: TextStyle(color: Colors.white),
                     ),
                     color: Colors.purple,
