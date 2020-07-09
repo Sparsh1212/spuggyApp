@@ -38,10 +38,10 @@ class _EditIssueState extends State<EditIssue> {
       ),
       body: Center(
         child: Container(
-          height: 400.0,
+          height: 270.0,
           width: 300.0,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               DropDownFormField(
                 onChanged: (value) {
@@ -109,85 +109,64 @@ class _EditIssueState extends State<EditIssue> {
                   return Container();
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: FlatButton(
-                  onPressed: () async {
-                    var responseCode =
-                        await brainObj.deleteIssue(token, issue['id']);
-                    if (responseCode == 204) {
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: Text('Success'),
-                                content: Text('Issue Successfully Deleted'),
-                              ));
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: Text('Oops'),
-                                content: Text('Sorry, something went wrong'),
-                              ));
-                    }
-                  },
-                  color: Colors.red,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.delete,
-                        color: Colors.white,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.teal[400])),
+                      child: Text(
+                        'Update Issue',
+                        style:
+                            TextStyle(color: Colors.teal[400], fontSize: 18.0),
                       ),
-                      SizedBox(width: 10.0),
-                      Text(
-                        'Delete Issue',
-                        style: TextStyle(color: Colors.white),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: FlatButton(
-                    color: Colors.teal[400],
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 10.0),
-                        Text(
-                          'Update Issue Status',
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
-                    ),
-                    onPressed: () async {
-                      var obj = y != null
-                          ? {
-                              'issue_title': issue['issue_title'],
-                              'issue_project': issue['issue_project'],
-                              'issue_status': x,
-                              'assigned_to': y
-                            }
-                          : {
-                              'issue_title': issue['issue_title'],
-                              'issue_project': issue['issue_project'],
-                              'issue_status': x
-                            };
+                      onPressed: () async {
+                        var obj = y != null
+                            ? {
+                                'issue_title': issue['issue_title'],
+                                'issue_project': issue['issue_project'],
+                                'issue_status': x,
+                                'assigned_to': y
+                              }
+                            : {
+                                'issue_title': issue['issue_title'],
+                                'issue_project': issue['issue_project'],
+                                'issue_status': x
+                              };
 
+                        var responseCode =
+                            await brainObj.updateIssue(token, obj, issue['id']);
+                        if (responseCode == 200) {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text('Success'),
+                                    content: Text('Issue Successfully Updated'),
+                                  ));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text('Oops'),
+                                    content:
+                                        Text('Sorry, something went wrong'),
+                                  ));
+                        }
+                      }),
+                  FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.red)),
+                    onPressed: () async {
                       var responseCode =
-                          await brainObj.updateIssue(token, obj, issue['id']);
-                      if (responseCode == 200) {
+                          await brainObj.deleteIssue(token, issue['id']);
+                      if (responseCode == 204) {
                         showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
                                   title: Text('Success'),
-                                  content: Text('Issue Successfully Updated'),
+                                  content: Text('Issue Successfully Deleted'),
                                 ));
                       } else {
                         showDialog(
@@ -197,8 +176,14 @@ class _EditIssueState extends State<EditIssue> {
                                   content: Text('Sorry, something went wrong'),
                                 ));
                       }
-                    }),
-              )
+                    },
+                    child: Text(
+                      'Delete Issue',
+                      style: TextStyle(color: Colors.red, fontSize: 18.0),
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
         ),

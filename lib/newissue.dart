@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'brain.dart';
+import 'common.dart';
 
 class NewIssue extends StatefulWidget {
   final String token;
@@ -30,22 +31,22 @@ class _NewIssueState extends State<NewIssue> {
         child: Container(
           height: 500.0,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TextField(
                 controller: titleHandler,
-                decoration: InputDecoration(
-                    labelText: 'Issue Title',
-                    hintText: 'Enter the title',
-                    border: OutlineInputBorder()),
+                decoration: textFieldDecoration,
+              ),
+              SizedBox(
+                height: 25.0,
               ),
               TextField(
                 controller: descriptionHandler,
-                decoration: InputDecoration(
-                  labelText: 'Issue Description (Optional)',
-                  hintText: 'Enter Description',
-                  border: OutlineInputBorder(),
-                ),
+                decoration: textFieldDecoration.copyWith(
+                    hintText: 'Description (Optional)',
+                    prefixIcon: Icon(Icons.description)),
+              ),
+              SizedBox(
+                height: 25.0,
               ),
               DropDownFormField(
                 onChanged: (value) {
@@ -69,11 +70,17 @@ class _NewIssueState extends State<NewIssue> {
                 textField: 'display',
                 valueField: 'value',
               ),
+              SizedBox(
+                height: 25.0,
+              ),
               FlatButton(
-                color: Colors.purple,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.purple)),
+                //color: Colors.purple,
                 child: Text(
                   'Raise Issue',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.purple, fontSize: 20.0),
                 ),
                 onPressed: () async {
                   var obj = {

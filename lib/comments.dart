@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'brain.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'common.dart';
 
 class Comments extends StatelessWidget {
   final brainObj = Brain();
@@ -66,17 +67,17 @@ class Comments extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 15.0, 5.0, 8.0),
                     child: Row(
                       children: [
                         Expanded(
                           flex: 8,
                           child: TextField(
                             controller: commentTextHandler,
-                            decoration: InputDecoration(
-                              labelText: 'Add a Comment',
-                              border: OutlineInputBorder(),
-                            ),
+                            decoration: textFieldDecoration.copyWith(
+                                hintText: 'Add a comment',
+                                prefixIcon: Icon(Icons.tag_faces),
+                                fillColor: Colors.grey[200]),
                           ),
                         ),
                         Expanded(
