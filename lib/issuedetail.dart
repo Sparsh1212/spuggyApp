@@ -36,103 +36,201 @@ class IssueDetail extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Details'),
-        backgroundColor: Colors.purple,
+        title: Text('detail'),
       ),
-      body: Center(
-        child: Container(
-          height: 500.0,
-          width: 300.0,
-          child: Card(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    issue['issue_title'],
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+      body: Container(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+              child: Container(
+                width: 350.0,
+                decoration: BoxDecoration(
+                  color: Colors.blue[700],
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                  child: Text(issue['issue_title'],
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                          color: Colors.white)),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 1.0),
+              child: Container(
+                width: 350.0,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [Colors.pink[300], Colors.red[300]]),
+                  color: Colors.blue[700],
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                          child: Text('Description',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25.0,
+                                  color: Colors.white))),
+                      Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 12.0),
+                          child: Text(
+                            issue['issue_description'],
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15.0,
+                            ),
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 15.0),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.stars,
+                                    size: 30.0,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Text(
+                                    issue['issue_tag'],
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.report,
+                                    size: 30.0,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Text(issue['issue_status'],
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                ],
+                              ),
+                            ]),
+                      ),
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text('Description: ${issue['issue_description']}'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.person),
-                    SizedBox(
-                      width: 15.0,
-                    ),
-                    Text(
-                      'Creator: ${issue['created_by']}',
-                      style: TextStyle(color: Colors.green),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.person),
-                    SizedBox(
-                      width: 15.0,
-                    ),
-                    Text(
-                      'Assigned To: ${issue['currently_assigned_to']}',
-                      style: TextStyle(color: Colors.green),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.stars),
-                    SizedBox(
-                      width: 15.0,
-                    ),
-                    Text(
-                      'Issue Tag: ${issue['issue_tag']}',
-                      style: TextStyle(color: Colors.deepOrange),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.lightbulb_outline),
-                    SizedBox(
-                      width: 15.0,
-                    ),
-                    Text(
-                      'Issue Status: ${issue['issue_status']}',
-                      style: TextStyle(color: Colors.deepOrange),
-                    ),
-                  ],
-                ),
-                Visibility(
-                  visible: checkIfEditAllowed(),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+              child: Container(
+                  width: 350.0,
+                  decoration: BoxDecoration(
+                    color: Colors.blue[700],
+                    borderRadius: BorderRadius.circular(5.0),
+                    gradient: LinearGradient(
+                        colors: [Colors.yellow[900], Colors.orange]),
+                  ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 80.0),
-                    child: FlatButton(
-                      color: Colors.green,
+                    padding: const EdgeInsets.all(15.0),
+                    child: IntrinsicHeight(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            Icons.mode_edit,
-                            color: Colors.white,
+                          Column(
+                            children: [
+                              Text(
+                                'Creator',
+                                style: TextStyle(
+                                    fontSize: 25.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 12.0,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.person_pin,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 5.0),
+                                  Text(issue['created_by'],
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                ],
+                              )
+                            ],
                           ),
-                          SizedBox(
-                            width: 10.0,
+                          Column(
+                            children: [
+                              Text('Assigned To',
+                                  style: TextStyle(
+                                      fontSize: 25.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.person_pin,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 5.0,
+                                  ),
+                                  Text(
+                                    issue['currently_assigned_to'],
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
-                          Text(
-                            'Edit',
-                            style: TextStyle(color: Colors.white),
-                          )
                         ],
+                      ),
+                    ),
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Row(
+                children: [
+                  Visibility(
+                    visible: checkIfEditAllowed(),
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0.0),
+                          side: BorderSide(color: Colors.green)),
+                      child: Text(
+                        'Edit',
+                        style: TextStyle(color: Colors.green, fontSize: 22.0),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -146,27 +244,35 @@ class IssueDetail extends StatelessWidget {
                       },
                     ),
                   ),
-                ),
-                FlatButton(
-                  child: Text(
-                    'View Comments',
-                    style: TextStyle(color: Colors.white),
+                  Visibility(
+                    visible: checkIfEditAllowed(),
+                    child: SizedBox(
+                      width: 10.0,
+                    ),
                   ),
-                  color: Colors.blue,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Comments(
-                                  token: token,
-                                  issueId: issue['id'],
-                                  issue: issue,
-                                )));
-                  },
-                )
-              ],
+                  FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0.0),
+                        side: BorderSide(color: Colors.red)),
+                    child: Text(
+                      'Comments',
+                      style: TextStyle(color: Colors.red, fontSize: 22.0),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Comments(
+                                    token: token,
+                                    issueId: issue['id'],
+                                    issue: issue,
+                                  )));
+                    },
+                  )
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
