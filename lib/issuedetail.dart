@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spuggyflutter/editissue.dart';
 import 'comments.dart';
 import 'editissue.dart';
+import 'common.dart';
 
 class IssueDetail extends StatelessWidget {
   final dynamic project;
@@ -36,7 +37,12 @@ class IssueDetail extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('detail'),
+        backgroundColor: Colors.orange,
+        centerTitle: true,
+        title: Text(
+          'Issue Details',
+          style: whiteBold,
+        ),
       ),
       body: Container(
         child: Column(

@@ -16,8 +16,12 @@ class Comments extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Comments'),
-        backgroundColor: Colors.purple,
+        centerTitle: true,
+        title: Text(
+          'Comments',
+          style: whiteBold,
+        ),
+        backgroundColor: Colors.brown,
       ),
       body: FutureBuilder(
         future: brainObj.fetchComments(token, issueId),

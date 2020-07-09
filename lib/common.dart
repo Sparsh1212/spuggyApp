@@ -14,3 +14,6 @@ var textFieldDecoration = InputDecoration(
   filled: true,
   fillColor: Colors.grey[300],
 );
+
+var whiteBold =
+    TextStyle(color: Colors.white, fontFamily: 'Galada', fontSize: 60.0);

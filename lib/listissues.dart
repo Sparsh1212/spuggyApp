@@ -4,6 +4,7 @@ import 'brain.dart';
 import 'issuedetail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'newissue.dart';
+import 'common.dart';
 
 class ListIssues extends StatelessWidget {
   final project; // new
@@ -21,8 +22,12 @@ class ListIssues extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Issues'),
-        backgroundColor: Colors.purple,
+        centerTitle: true,
+        title: Text(
+          'All Issues',
+          style: whiteBold,
+        ),
+        backgroundColor: Colors.pink[400],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(

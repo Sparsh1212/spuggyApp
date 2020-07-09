@@ -1,6 +1,8 @@
 import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:spuggyflutter/common.dart';
 import 'brain.dart';
+import 'common.dart';
 
 final brainObj = Brain();
 
@@ -34,7 +36,12 @@ class _EditIssueState extends State<EditIssue> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Issue'),
+        centerTitle: true,
+        backgroundColor: Colors.blue[700],
+        title: Text(
+          'Edit Issue',
+          style: whiteBold,
+        ),
       ),
       body: Center(
         child: Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spuggyflutter/common.dart';
 import 'brain.dart';
 import 'listissues.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_html/style.dart';
 import 'popupButton.dart';
 import 'bottomnavigator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'common.dart';
 
 class ListProjects extends StatelessWidget {
   final bottomNavObj = BottomNavigator();
@@ -20,8 +22,12 @@ class ListProjects extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Text('All Projects'),
+        title: Text(
+          'All Projects',
+          style: whiteBold,
+        ),
         backgroundColor: Colors.purple,
         actions: [
           popupObj.popupList(
