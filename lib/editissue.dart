@@ -45,8 +45,8 @@ class _EditIssueState extends State<EditIssue> {
       ),
       body: Center(
         child: Container(
-          height: 270.0,
-          width: 300.0,
+          height: MediaQuery.of(context).size.height * 0.37,
+          width: MediaQuery.of(context).size.width * 0.8, //300.0
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -36,7 +36,7 @@ class ListProjects extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData == true) {
             return CarouselSlider(
-              height: 600.0,
+              height: MediaQuery.of(context).size.height * 0.8,
               items: snapshot.data.map<Widget>((project) {
                 return Builder(
                   builder: (BuildContext context) {
@@ -54,7 +54,10 @@ class ListProjects extends StatelessWidget {
                       },
                       child: Container(
                         margin: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 20.0),
+                            horizontal:
+                                MediaQuery.of(context).size.width * 0.02,
+                            vertical:
+                                MediaQuery.of(context).size.height * 0.02),
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -83,7 +86,7 @@ class ListProjects extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: 10.0,
+                              height: MediaQuery.of(context).size.height * 0.01,
                             ),
                             Padding(
                               padding:

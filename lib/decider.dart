@@ -15,7 +15,7 @@ class Decider extends StatelessWidget {
             if (snapshot.hasData) {
               if (snapshot.data['token'] != '') {
                 if (snapshot.data['profile'][0]['isBlocked'] == true) {
-                  return Login(message: 'Your access has been blocked');
+                  return Login(message: 'Access is blocked!');
                 }
                 return ListProjects(
                   token: snapshot.data['token'],
@@ -45,21 +45,22 @@ class Decider extends StatelessWidget {
                         size: 70.0,
                       ),
                       Text(
-                        'SPUGGY',
+                        'Spuggy',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 50.0,
-                            fontWeight: FontWeight.bold),
+                            fontFamily: 'Galada'),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 5.0,
+                    height: 6.0,
                   ),
                   Text(
-                    '- Bug Tracking is now simple',
+                    'Bug Tracking is now simple',
                     style: TextStyle(
-                        color: Colors.white, fontStyle: FontStyle.italic),
+                      color: Colors.white,
+                    ),
                   )
                 ],
               ),

@@ -77,11 +77,11 @@ class MemberSearch extends SearchDelegate {
                               backgroundColor: Colors.white,
                               backgroundImage: NetworkImage(
                                   'https://api.adorable.io/avatars/283/${resultsList[index]['username']}@adorable.png'),
-                              radius: 20.0,
+                              radius: 15.0,
                             ),
                           ),
                           SizedBox(
-                            width: 10.0,
+                            width: MediaQuery.of(context).size.width * 0.02,
                           ),
                           Text(
                             resultsList[index]['name'],

@@ -22,12 +22,12 @@ class Profile extends StatelessWidget {
             overflow: Overflow.visible,
             children: [
               Container(
-                color: Colors.purple[200],
+                color: Colors.teal[600],
                 height: MediaQuery.of(context).size.height * 0.2,
                 width: MediaQuery.of(context).size.width,
               ),
               Positioned(
-                bottom: -50,
+                bottom: -1 * MediaQuery.of(context).size.height * 0.07,
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   backgroundImage: NetworkImage(
@@ -38,7 +38,7 @@ class Profile extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 60.0,
+            height: MediaQuery.of(context).size.height * 0.1,
           ),
           Center(
             child: Text(
@@ -47,7 +47,7 @@ class Profile extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 30.0,
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -57,7 +57,7 @@ class Profile extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50.0,
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -67,7 +67,7 @@ class Profile extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50.0,
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -77,7 +77,7 @@ class Profile extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50.0,
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),

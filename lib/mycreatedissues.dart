@@ -51,7 +51,6 @@ class MyCreatedIssues extends StatelessWidget {
                                     )));
                       },
                       child: Container(
-                        // height: 180.0,
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(

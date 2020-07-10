@@ -65,7 +65,6 @@ class ListIssues extends StatelessWidget {
                                     )));
                       },
                       child: Container(
-                        // height: 180.0,
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -153,8 +152,8 @@ class ListIssues extends StatelessWidget {
             );
           }
           return Center(
-            child: SpinKitWave(
-              color: Colors.purple,
+            child: SpinKitFadingGrid(
+              color: Colors.pink[600],
             ),
           );
         },

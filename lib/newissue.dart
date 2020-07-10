@@ -33,7 +33,7 @@ class _NewIssueState extends State<NewIssue> {
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Container(
-          height: 500.0,
+          height: MediaQuery.of(context).size.height * 0.5,
           child: Column(
             children: [
               TextField(
@@ -41,7 +41,7 @@ class _NewIssueState extends State<NewIssue> {
                 decoration: textFieldDecoration,
               ),
               SizedBox(
-                height: 25.0,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               TextField(
                 controller: descriptionHandler,
@@ -50,7 +50,7 @@ class _NewIssueState extends State<NewIssue> {
                     prefixIcon: Icon(Icons.description)),
               ),
               SizedBox(
-                height: 25.0,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               DropDownFormField(
                 onChanged: (value) {
@@ -75,7 +75,7 @@ class _NewIssueState extends State<NewIssue> {
                 valueField: 'value',
               ),
               SizedBox(
-                height: 25.0,
+                height: MediaQuery.of(context).size.height * 0.03,
               ),
               FlatButton(
                 shape: RoundedRectangleBorder(

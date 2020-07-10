@@ -76,7 +76,7 @@ class Comments extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 15.0, 5.0, 8.0),
+                    padding: const EdgeInsets.fromLTRB(8.0, 5.0, 5.0, 8.0),
                     child: Row(
                       children: [
                         Expanded(

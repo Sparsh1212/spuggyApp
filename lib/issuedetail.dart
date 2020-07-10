@@ -50,7 +50,7 @@ class IssueDetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               child: Container(
-                width: 350.0,
+                width: MediaQuery.of(context).size.width * 0.95,
                 decoration: BoxDecoration(
                   color: Colors.blue[700],
                   borderRadius: BorderRadius.circular(5.0),
@@ -69,7 +69,7 @@ class IssueDetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 1.0),
               child: Container(
-                width: 350.0,
+                width: MediaQuery.of(context).size.width * 0.95,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                       colors: [Colors.pink[300], Colors.red[300]]),
@@ -150,7 +150,7 @@ class IssueDetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               child: Container(
-                  width: 350.0,
+                  width: MediaQuery.of(context).size.width * 0.95,
                   decoration: BoxDecoration(
                     color: Colors.blue[700],
                     borderRadius: BorderRadius.circular(5.0),

@@ -41,8 +41,8 @@ class _EditMemberState extends State<EditMember> {
       ),
       body: Center(
         child: Container(
-          height: 600.0,
-          width: 300.0,
+          height: MediaQuery.of(context).size.height * 0.80,
+          width: MediaQuery.of(context).size.width * 0.9,
           child: Card(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -68,7 +68,7 @@ class _EditMemberState extends State<EditMember> {
                     child: Text('Branch:  ${member['branch']}')),
                 Text('Current Status:  ${member['status']}'),
                 Container(
-                  width: 200.0,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   child: CheckboxListTile(
                     title: Text('Block User ?'),
                     value: x,

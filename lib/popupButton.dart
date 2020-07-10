@@ -30,7 +30,7 @@ class PopupButton {
                     radius: 20.0,
                   ),
                   SizedBox(
-                    width: 15.0,
+                    width: MediaQuery.of(context).size.height * 0.025,
                   ),
                   Text('My Profile'),
                 ],
@@ -38,21 +38,24 @@ class PopupButton {
             )),
         PopupMenuItem(
           value: 2,
-          child: FlatButton(
-            color: Colors.purple,
-            child: Text(
-              'Logout',
-              style: TextStyle(color: Colors.white),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: FlatButton(
+              color: Colors.purple,
+              child: Text(
+                'Logout',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () async {
+                await brainObj.logout();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Login(
+                              message: 'Logout Successful!',
+                            )));
+              },
             ),
-            onPressed: () async {
-              await brainObj.logout();
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Login(
-                            message: 'You have been Successfully logged out',
-                          )));
-            },
           ),
         ),
       ],

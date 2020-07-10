@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'listproj.dart';
 import 'webview.dart';
+import 'common.dart';
 
 class Login extends StatefulWidget {
   final String message;
@@ -32,7 +33,10 @@ class _LoginState extends State<Login> {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('Login to Spuggy'),
+          title: Text(
+            'Login',
+            style: whiteBold,
+          ),
           backgroundColor: Colors.purple,
         ),
         body: Column(
@@ -43,32 +47,28 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.all(15.0),
                 child: TextField(
                   controller: usernameController,
-                  decoration: InputDecoration(
-                    labelText: 'Username',
-                    hintText: 'Enter Username',
-                    border: OutlineInputBorder(),
-                  ),
+                  decoration: textFieldDecoration.copyWith(
+                      hintText: 'Username', prefixIcon: Icon(Icons.person)),
                 )),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: TextField(
                 controller: passwordController,
-                decoration: InputDecoration(
-                  hintText: 'Enter Password',
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
+                decoration: textFieldDecoration.copyWith(
+                    hintText: 'Password', prefixIcon: Icon(Icons.lock)),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
                   FlatButton(
-                    color: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.blue[900])),
                     child: Text(
                       'Login',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.blue[900], fontSize: 20.0),
                     ),
                     onPressed: () async {
                       var username = usernameController.text;
@@ -99,14 +99,16 @@ class _LoginState extends State<Login> {
                     },
                   ),
                   SizedBox(
-                    width: 20.0,
+                    width: MediaQuery.of(context).size.width * 0.06,
                   ),
                   FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.purple)),
                     child: Text(
-                      'Login with OMNIPORT',
-                      style: TextStyle(color: Colors.white),
+                      'Omniport Login',
+                      style: TextStyle(color: Colors.purple, fontSize: 20.0),
                     ),
-                    color: Colors.purple,
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => WebView()));
@@ -116,10 +118,14 @@ class _LoginState extends State<Login> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 22.0, vertical: 10.0),
               child: Text(
                 message,
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17.0),
               ),
             )
           ],

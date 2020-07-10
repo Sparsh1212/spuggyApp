@@ -64,7 +64,6 @@ class _AssignedIssuesState extends State<AssignedIssues> {
                                   )));
                     },
                     child: Container(
-                      // height: 180.0,
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -244,79 +243,3 @@ class _AssignedIssuesState extends State<AssignedIssues> {
     );
   }
 }
-
-//  Row(
-//                               children: [
-//                                 Expanded(
-//                                   flex: 5,
-//                                   child: DropDownFormField(
-//                                     onChanged: (value) {
-//                                       setState(() {
-//                                         x = value;
-//                                       });
-//                                     },
-//                                     value: x,
-//                                     titleText: 'Update Status',
-//                                     hintText: 'Please choose one',
-//                                     dataSource: [
-//                                       {
-//                                         "display": "Created",
-//                                         "value": "Created",
-//                                       },
-//                                       {
-//                                         "display": "Open",
-//                                         "value": "Open",
-//                                       },
-//                                       {
-//                                         "display": "Rejected",
-//                                         "value": "Rejected",
-//                                       },
-//                                       {
-//                                         "display": "Assigned",
-//                                         "value": "Assigned",
-//                                       },
-//                                       {
-//                                         "display": "Resolved",
-//                                         "value": "Resolved",
-//                                       },
-//                                     ],
-//                                     textField: 'display',
-//                                     valueField: 'value',
-//                                   ),
-//                                 ),
-//                                 Expanded(
-//                                   child: FlatButton(
-//                                     child: Icon(Icons.mode_edit),
-//                                     onPressed: () async {
-//                                       var obj = {
-//                                         'issue_title': snapshot.data[index]
-//                                             ['issue_title'],
-//                                         'issue_project': snapshot.data[index]
-//                                             ['issue_project'],
-//                                         'issue_status': x
-//                                       };
-//                                       var responseCode =
-//                                           await brainObj.updateIssue(token, obj,
-//                                               snapshot.data[index]['id']);
-//                                       if (responseCode == 200) {
-//                                         showDialog(
-//                                             context: context,
-//                                             builder: (context) => AlertDialog(
-//                                                   title: Text('Success'),
-//                                                   content: Text(
-//                                                       'Status Successfully Updated'),
-//                                                 ));
-//                                       } else {
-//                                         showDialog(
-//                                             context: context,
-//                                             builder: (context) => AlertDialog(
-//                                                   title: Text('Oops'),
-//                                                   content: Text(
-//                                                       'Sorry, something went wrong'),
-//                                                 ));
-//                                       }
-//                                     },
-//                                   ),
-//                                 )
-//                               ],
-//                             ),
