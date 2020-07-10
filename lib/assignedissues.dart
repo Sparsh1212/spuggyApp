@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spuggyflutter/common.dart';
 import 'brain.dart';
 import 'issuedetail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -31,64 +32,117 @@ class _AssignedIssuesState extends State<AssignedIssues> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Assigned Issues'),
-        backgroundColor: Colors.purple,
-        actions: [
-          popupObj.popupList(
-              profile[0]['name'],
-              profile[0]['branch'],
-              profile[0]['username'],
-              profile[0]['status'],
-              profile[0]['current_year'])
-        ],
+        centerTitle: true,
+        title: Text(
+          'Assigned Issues',
+          style: whiteBold,
+        ),
+        backgroundColor: Colors.orange[800],
+        actions: [popupObj.popupList(profile)],
       ),
-      bottomNavigationBar:
-          bottomNavObj.bottomNavigator(token, profile, 2, context),
+      bottomNavigationBar: bottomNavObj.bottomNavigator(
+          token, profile, 2, context, Colors.orange[900]),
       body: FutureBuilder(
         future: brainObj.fetchAssignedIssues(widget.token),
         builder: (context, snapshot) {
           if (snapshot.hasData == true) {
             return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Card(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => IssueDetail(
+                                    token: token,
+                                    issue: snapshot.data[index],
+                                    project: null,
+                                    profile: profile,
+                                  )));
+                    },
+                    child: Container(
+                      // height: 180.0,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.orange[900],
+                                blurRadius: 6.0,
+                                offset: Offset(1, 5)),
+                          ],
+                          borderRadius: BorderRadius.circular(15.0),
+                          gradient: LinearGradient(
+                            colors: [Colors.orange[300], Colors.orange[900]],
+                          )),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15.0, vertical: 15.0),
                             child: Text(
                               snapshot.data[index]['issue_title'],
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20.0),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Status: ${snapshot.data[index]['issue_status']}',
-                              style: TextStyle(
-                                color: Colors.orange[900],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 0.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Icon(Icons.person),
-                                SizedBox(
-                                  width: 10.0,
+                                RawMaterialButton(
+                                  onPressed: () {},
+                                  elevation: 2.0,
+                                  fillColor: Colors.white,
+                                  child: Icon(
+                                    Icons.report,
+                                    size: 30.0,
+                                  ),
+                                  shape: CircleBorder(),
                                 ),
-                                Text(snapshot.data[index]['created_by']),
+                                Text(snapshot.data[index]['issue_status'],
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 17.0)),
                               ],
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                RawMaterialButton(
+                                  onPressed: () {},
+                                  elevation: 2.0,
+                                  fillColor: Colors.white,
+                                  child: Icon(
+                                    Icons.person,
+                                    size: 30.0,
+                                  ),
+                                  shape: CircleBorder(),
+                                ),
+                                Text(snapshot.data[index]['created_by'],
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 17.0)),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 3.0, horizontal: 12.0),
                             child: Row(
                               children: [
                                 Expanded(
@@ -130,7 +184,10 @@ class _AssignedIssuesState extends State<AssignedIssues> {
                                 ),
                                 Expanded(
                                   child: FlatButton(
-                                    child: Icon(Icons.mode_edit),
+                                    child: Icon(
+                                      Icons.mode_edit,
+                                      color: Colors.white,
+                                    ),
                                     onPressed: () async {
                                       var obj = {
                                         'issue_title': snapshot.data[index]
@@ -165,37 +222,21 @@ class _AssignedIssuesState extends State<AssignedIssues> {
                               ],
                             ),
                           ),
-                          FlatButton(
-                            color: Colors.blue,
-                            child: Text(
-                              'View Details',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => IssueDetail(
-                                            token: widget.token,
-                                            issue: snapshot.data[index],
-                                            project: null,
-                                            profile: profile,
-                                          )));
-                            },
-                          ),
                         ],
                       ),
                     ),
-                  );
-                });
+                  ),
+                );
+              },
+            );
           } else if (snapshot.hasError == true) {
             return Center(
               child: Text('Error Fetching Issues'),
             );
           }
           return Center(
-            child: SpinKitWave(
-              color: Colors.purple,
+            child: SpinKitFadingGrid(
+              color: Colors.orange[900],
             ),
           );
         },
@@ -203,3 +244,79 @@ class _AssignedIssuesState extends State<AssignedIssues> {
     );
   }
 }
+
+//  Row(
+//                               children: [
+//                                 Expanded(
+//                                   flex: 5,
+//                                   child: DropDownFormField(
+//                                     onChanged: (value) {
+//                                       setState(() {
+//                                         x = value;
+//                                       });
+//                                     },
+//                                     value: x,
+//                                     titleText: 'Update Status',
+//                                     hintText: 'Please choose one',
+//                                     dataSource: [
+//                                       {
+//                                         "display": "Created",
+//                                         "value": "Created",
+//                                       },
+//                                       {
+//                                         "display": "Open",
+//                                         "value": "Open",
+//                                       },
+//                                       {
+//                                         "display": "Rejected",
+//                                         "value": "Rejected",
+//                                       },
+//                                       {
+//                                         "display": "Assigned",
+//                                         "value": "Assigned",
+//                                       },
+//                                       {
+//                                         "display": "Resolved",
+//                                         "value": "Resolved",
+//                                       },
+//                                     ],
+//                                     textField: 'display',
+//                                     valueField: 'value',
+//                                   ),
+//                                 ),
+//                                 Expanded(
+//                                   child: FlatButton(
+//                                     child: Icon(Icons.mode_edit),
+//                                     onPressed: () async {
+//                                       var obj = {
+//                                         'issue_title': snapshot.data[index]
+//                                             ['issue_title'],
+//                                         'issue_project': snapshot.data[index]
+//                                             ['issue_project'],
+//                                         'issue_status': x
+//                                       };
+//                                       var responseCode =
+//                                           await brainObj.updateIssue(token, obj,
+//                                               snapshot.data[index]['id']);
+//                                       if (responseCode == 200) {
+//                                         showDialog(
+//                                             context: context,
+//                                             builder: (context) => AlertDialog(
+//                                                   title: Text('Success'),
+//                                                   content: Text(
+//                                                       'Status Successfully Updated'),
+//                                                 ));
+//                                       } else {
+//                                         showDialog(
+//                                             context: context,
+//                                             builder: (context) => AlertDialog(
+//                                                   title: Text('Oops'),
+//                                                   content: Text(
+//                                                       'Sorry, something went wrong'),
+//                                                 ));
+//                                       }
+//                                     },
+//                                   ),
+//                                 )
+//                               ],
+//                             ),

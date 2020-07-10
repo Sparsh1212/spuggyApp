@@ -6,13 +6,13 @@ import 'assignedissues.dart';
 import 'members.dart';
 
 class BottomNavigator {
-  Widget bottomNavigator(
-      String token, dynamic profile, int index, BuildContext context) {
+  Widget bottomNavigator(String token, dynamic profile, int index,
+      BuildContext context, Color color) {
     return CurvedNavigationBar(
       height: 50.0,
-      color: Colors.purple,
+      color: color,
       backgroundColor: Colors.white,
-      buttonBackgroundColor: Colors.purple,
+      buttonBackgroundColor: color,
       index: index,
       items: <Widget>[
         Icon(

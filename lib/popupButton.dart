@@ -1,79 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:spuggyflutter/profile.dart';
 import 'brain.dart';
 import 'login.dart';
+import 'profile.dart';
 
 var brainObj = Brain();
 
 class PopupButton {
-  Widget popupList(
-    String name,
-    String branch,
-    String username,
-    String status,
-    int currentYear,
-  ) {
+  Widget popupList(dynamic profile) {
     return PopupMenuButton(
-      color: Colors.purple[200],
       itemBuilder: (context) => [
         PopupMenuItem(
-          value: 1,
-          child: Container(
-            height: 200.0,
-            width: 300.0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  'Hello $name',
-                  style: TextStyle(color: Colors.white),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Text(
-                    branch,
-                    style: TextStyle(color: Colors.white),
+            value: 1,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Profile(
+                              profile: profile,
+                            )));
+              },
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    backgroundImage: NetworkImage(
+                        'https://api.adorable.io/avatars/283/${profile[0]['username']}@adorable.png'),
+                    radius: 20.0,
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.person_outline,
-                      size: 15.0,
-                    ),
-                    SizedBox(
-                      width: 8.0,
-                    ),
-                    Text(
-                      '@$username',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.verified_user,
-                      size: 15.0,
-                    ),
-                    SizedBox(
-                      width: 8.0,
-                    ),
-                    Text(
-                      'Status:  $status',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-                Text(
-                  'Current Year:  $currentYear',
-                  style: TextStyle(color: Colors.white),
-                )
-              ],
-            ),
-          ),
-        ),
+                  SizedBox(
+                    width: 15.0,
+                  ),
+                  Text('My Profile'),
+                ],
+              ),
+            )),
         PopupMenuItem(
           value: 2,
           child: FlatButton(

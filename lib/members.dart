@@ -6,6 +6,7 @@ import 'editmember.dart';
 import 'bottomnavigator.dart';
 import 'popupButton.dart';
 import 'membersearch.dart';
+import 'common.dart';
 
 class Members extends StatelessWidget {
   final popupObj = PopupButton();
@@ -21,12 +22,13 @@ class Members extends StatelessWidget {
       future: brainObj.fetchProfiles(token),
       builder: (context, snapshot) {
         return Scaffold(
-            bottomNavigationBar:
-                bottomNavObj.bottomNavigator(token, profile, 3, context),
+            bottomNavigationBar: bottomNavObj.bottomNavigator(
+                token, profile, 3, context, Colors.blue[900]),
             appBar: AppBar(
+              centerTitle: true,
               automaticallyImplyLeading: false,
-              title: Text('All Members'),
-              backgroundColor: Colors.purple,
+              title: Text('All Members', style: whiteBold),
+              backgroundColor: Colors.indigo[900],
               actions: [
                 IconButton(
                     icon: Icon(Icons.search),
@@ -38,12 +40,7 @@ class Members extends StatelessWidget {
                                     token: token, membersList: snapshot.data));
                           }
                         : null),
-                popupObj.popupList(
-                    profile[0]['name'],
-                    profile[0]['branch'],
-                    profile[0]['username'],
-                    profile[0]['status'],
-                    profile[0]['current_year'])
+                popupObj.popupList(profile)
               ],
             ),
             body: snapshot.hasData
@@ -53,96 +50,110 @@ class Members extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 10.0),
-                        child: Card(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15.0, vertical: 10.0),
-                                child: Row(
-                                  children: [
-                                    Icon(Icons.person),
-                                    SizedBox(
-                                      width: 8.0,
-                                    ),
-                                    Hero(
-                                      tag: snapshot.data[index]['id'],
-                                      child: Text(
-                                        snapshot.data[index]['name'],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20.0),
-                                      ),
-                                    ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => EditMember(
+                                          token: token,
+                                          member: snapshot.data[index],
+                                        )));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.indigo[900],
+                                      blurRadius: 6.0,
+                                      offset: Offset(1, 6)),
+                                ],
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.blue[500],
+                                    Colors.indigo[400]
                                   ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15.0, vertical: 10.0),
-                                child: Text(
-                                  '@${snapshot.data[index]['username']}',
-                                  style: TextStyle(fontSize: 12.0),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15.0),
-                                child: Text(
-                                  '${snapshot.data[index]['branch']}',
-                                  style: TextStyle(fontSize: 12.0),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.verified_user,
-                                      size: 15.0,
-                                    ),
-                                    SizedBox(
-                                      width: 8.0,
-                                    ),
-                                    Text(
-                                      'Status: ${snapshot.data[index]['status']}',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Visibility(
-                                visible: snapshot.data[index]['isBlocked'],
-                                child: Padding(
+                                )),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 15.0, vertical: 5.0),
-                                  child: Text(
-                                    'Access is currently blocked',
-                                    style: TextStyle(color: Colors.red),
+                                      horizontal: 15.0, vertical: 10.0),
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        backgroundImage: NetworkImage(
+                                            'https://api.adorable.io/avatars/283/${snapshot.data[index]['username']}@adorable.png'),
+                                        radius: 20.0,
+                                      ),
+                                      SizedBox(
+                                        width: 10.0,
+                                      ),
+                                      Hero(
+                                        tag: snapshot.data[index]['id'],
+                                        child: Text(
+                                          snapshot.data[index]['name'],
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 25.0,
+                                              fontFamily: 'Galada'),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0),
-                                child: FlatButton(
-                                  color: Colors.blue,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0, vertical: 10.0),
                                   child: Text(
-                                    'Edit Access',
-                                    style: TextStyle(color: Colors.white),
+                                    '@${snapshot.data[index]['username']}',
+                                    style: whiteSmall,
                                   ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => EditMember(
-                                                  token: token,
-                                                  member: snapshot.data[index],
-                                                )));
-                                  },
                                 ),
-                              ),
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15.0),
+                                  child: Text(
+                                      '${snapshot.data[index]['branch']}',
+                                      style: whiteSmall),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.verified_user,
+                                        size: 15.0,
+                                        color: Colors.pink[100],
+                                      ),
+                                      SizedBox(
+                                        width: 8.0,
+                                      ),
+                                      Text(
+                                        'Status: ${snapshot.data[index]['status']}',
+                                        style: TextStyle(
+                                            color: Colors.pink[100],
+                                            fontSize: 15.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: snapshot.data[index]['isBlocked'],
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0, vertical: 5.0),
+                                    child: Text(
+                                      'Access is currently blocked',
+                                      style: TextStyle(color: Colors.red[100]),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -152,8 +163,8 @@ class Members extends StatelessWidget {
                         child: Text('Error Fetching Members'),
                       )
                     : Center(
-                        child: SpinKitWave(
-                          color: Colors.purple,
+                        child: SpinKitFadingGrid(
+                          color: Colors.indigo[900],
                         ),
                       ));
       },

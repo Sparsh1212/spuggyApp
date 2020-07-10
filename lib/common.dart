@@ -16,4 +16,8 @@ var textFieldDecoration = InputDecoration(
 );
 
 var whiteBold =
-    TextStyle(color: Colors.white, fontFamily: 'Galada', fontSize: 60.0);
+    TextStyle(color: Colors.white, fontFamily: 'Galada', fontSize: 30.0);
+
+var blackBold = TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0);
+
+var whiteSmall = TextStyle(color: Colors.white, fontSize: 15.0);

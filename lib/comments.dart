@@ -44,21 +44,26 @@ class Comments extends StatelessWidget {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
                                     children: [
-                                      Icon(Icons.person),
-                                      SizedBox(
-                                        width: 3.0,
+                                      CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        radius: 15.0,
+                                        backgroundImage: NetworkImage(
+                                            'https://api.adorable.io/avatars/283/${snapshot.data[index]['commented_by']}@adorable.png'),
                                       ),
-                                      Text(
-                                        snapshot.data[index]['commented_by'],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      )
+                                      SizedBox(
+                                        width: 12.0,
+                                      ),
+                                      Text(snapshot.data[index]['commented_by'],
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15.0,
+                                          ))
                                     ],
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(
-                                      15.0, 0.0, 0.0, 10.0),
+                                      15.0, 5.0, 0.0, 10.0),
                                   child: Text(
                                     snapshot.data[index]['comment_text'],
                                   ),
@@ -126,8 +131,8 @@ class Comments extends StatelessWidget {
             );
           }
           return Center(
-            child: SpinKitWave(
-              color: Colors.purple,
+            child: SpinKitFadingGrid(
+              color: Colors.brown[900],
             ),
           );
         },

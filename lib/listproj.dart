@@ -29,14 +29,7 @@ class ListProjects extends StatelessWidget {
           style: whiteBold,
         ),
         backgroundColor: Colors.purple,
-        actions: [
-          popupObj.popupList(
-              profile[0]['name'],
-              profile[0]['branch'],
-              profile[0]['username'],
-              profile[0]['status'],
-              profile[0]['current_year'])
-        ],
+        actions: [popupObj.popupList(profile)],
       ),
       body: FutureBuilder(
         future: brainObj.fetchProjs(token),
@@ -130,14 +123,14 @@ class ListProjects extends StatelessWidget {
             );
           }
           return Center(
-            child: SpinKitWave(
-              color: Colors.purple,
+            child: SpinKitFadingGrid(
+              color: Colors.purple[900],
             ),
           );
         },
       ),
-      bottomNavigationBar:
-          bottomNavObj.bottomNavigator(token, profile, 0, context),
+      bottomNavigationBar: bottomNavObj.bottomNavigator(
+          token, profile, 0, context, Colors.purple[700]),
     );
   }
 }
