@@ -24,7 +24,11 @@ class _NewIssueState extends State<NewIssue> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Raise a new Issue'),
+        centerTitle: true,
+        title: Text(
+          'Raise Issue',
+          style: whiteBold,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
@@ -76,11 +80,11 @@ class _NewIssueState extends State<NewIssue> {
               FlatButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.purple)),
+                    side: BorderSide(color: Colors.blue[700])),
                 //color: Colors.purple,
                 child: Text(
                   'Raise Issue',
-                  style: TextStyle(color: Colors.purple, fontSize: 20.0),
+                  style: TextStyle(color: Colors.blue[700], fontSize: 20.0),
                 ),
                 onPressed: () async {
                   var obj = {

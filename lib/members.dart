@@ -83,24 +83,24 @@ class Members extends StatelessWidget {
                                       horizontal: 15.0, vertical: 10.0),
                                   child: Row(
                                     children: [
-                                      CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        backgroundImage: NetworkImage(
-                                            'https://api.adorable.io/avatars/283/${snapshot.data[index]['username']}@adorable.png'),
-                                        radius: 20.0,
+                                      Hero(
+                                        tag: snapshot.data[index]['id'],
+                                        child: CircleAvatar(
+                                          backgroundColor: Colors.white,
+                                          backgroundImage: NetworkImage(
+                                              'https://api.adorable.io/avatars/283/${snapshot.data[index]['username']}@adorable.png'),
+                                          radius: 20.0,
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 10.0,
                                       ),
-                                      Hero(
-                                        tag: snapshot.data[index]['id'],
-                                        child: Text(
-                                          snapshot.data[index]['name'],
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 25.0,
-                                              fontFamily: 'Galada'),
-                                        ),
+                                      Text(
+                                        snapshot.data[index]['name'],
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 25.0,
+                                            fontFamily: 'Galada'),
                                       ),
                                     ],
                                   ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:spuggyflutter/common.dart';
 import 'brain.dart';
+import 'common.dart';
 
 class EditMember extends StatefulWidget {
   final String token;
@@ -30,7 +32,12 @@ class _EditMemberState extends State<EditMember> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Access Permissions'),
+        backgroundColor: Colors.red,
+        centerTitle: true,
+        title: Text(
+          'Edit Access',
+          style: whiteBold,
+        ),
       ),
       body: Center(
         child: Container(
@@ -42,12 +49,18 @@ class _EditMemberState extends State<EditMember> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Hero(
-                    tag: member['id'],
-                    child: Text(
-                      member['name'],
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 30.0),
-                    )),
+                  tag: member['id'],
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 50.0,
+                    backgroundImage: NetworkImage(
+                        'https://api.adorable.io/avatars/283/${member['username']}@adorable.png'),
+                  ),
+                ),
+                Text(
+                  member['name'],
+                  style: TextStyle(fontSize: 30.0, fontFamily: 'Galada'),
+                ),
                 Text(' @${member['username']}'),
                 Text('Current Year:  ${member['current_year']}'),
                 Padding(
@@ -93,10 +106,12 @@ class _EditMemberState extends State<EditMember> {
                   ),
                 ),
                 FlatButton(
-                  color: Colors.purple,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.red)),
                   child: Text(
-                    'Update Access Details',
-                    style: TextStyle(color: Colors.white),
+                    'Update Access',
+                    style: TextStyle(color: Colors.red, fontSize: 22.0),
                   ),
                   onPressed: () async {
                     var obj = {
