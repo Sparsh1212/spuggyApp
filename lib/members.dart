@@ -22,13 +22,11 @@ class Members extends StatelessWidget {
       future: brainObj.fetchProfiles(token),
       builder: (context, snapshot) {
         return Scaffold(
-            bottomNavigationBar: bottomNavObj.bottomNavigator(
-                token, profile, 3, context, Colors.blue[900]),
             appBar: AppBar(
               centerTitle: true,
               automaticallyImplyLeading: false,
               title: Text('All Members', style: whiteBold),
-              backgroundColor: Colors.indigo[900],
+              backgroundColor: Colors.blue[900],
               actions: [
                 IconButton(
                     icon: Icon(Icons.search),

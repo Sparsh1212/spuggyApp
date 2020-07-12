@@ -37,11 +37,9 @@ class _AssignedIssuesState extends State<AssignedIssues> {
           'Assigned Issues',
           style: whiteBold,
         ),
-        backgroundColor: Colors.orange[800],
+        backgroundColor: Colors.blue[900],
         actions: [popupObj.popupList(profile)],
       ),
-      bottomNavigationBar: bottomNavObj.bottomNavigator(
-          token, profile, 2, context, Colors.orange[900]),
       body: FutureBuilder(
         future: brainObj.fetchAssignedIssues(widget.token),
         builder: (context, snapshot) {
@@ -67,13 +65,13 @@ class _AssignedIssuesState extends State<AssignedIssues> {
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                                color: Colors.orange[900],
+                                color: Colors.blue[900],
                                 blurRadius: 6.0,
                                 offset: Offset(1, 5)),
                           ],
                           borderRadius: BorderRadius.circular(15.0),
                           gradient: LinearGradient(
-                            colors: [Colors.orange[300], Colors.orange[900]],
+                            colors: [Colors.blue[300], Colors.blue[800]],
                           )),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -96,46 +94,41 @@ class _AssignedIssuesState extends State<AssignedIssues> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                RawMaterialButton(
-                                  onPressed: () {},
-                                  elevation: 2.0,
-                                  fillColor: Colors.white,
-                                  child: Icon(
-                                    Icons.report,
-                                    size: 30.0,
-                                  ),
-                                  shape: CircleBorder(),
+                                Icon(
+                                  Icons.report,
+                                  size: 20.0,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 8.0,
                                 ),
                                 Text(snapshot.data[index]['issue_status'],
                                     style: TextStyle(
                                         fontStyle: FontStyle.italic,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
-                                        fontSize: 17.0)),
+                                        fontSize: 15.0)),
                               ],
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 10.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                RawMaterialButton(
-                                  onPressed: () {},
-                                  elevation: 2.0,
-                                  fillColor: Colors.white,
-                                  child: Icon(
-                                    Icons.person,
-                                    size: 30.0,
-                                  ),
-                                  shape: CircleBorder(),
+                                Icon(
+                                  Icons.person,
+                                  size: 20.0,
+                                  color: Colors.white,
                                 ),
+                                SizedBox(width: 8.0),
                                 Text(snapshot.data[index]['created_by'],
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                         fontStyle: FontStyle.italic,
-                                        fontSize: 17.0)),
+                                        fontSize: 15.0)),
                               ],
                             ),
                           ),
@@ -235,7 +228,7 @@ class _AssignedIssuesState extends State<AssignedIssues> {
           }
           return Center(
             child: SpinKitFadingGrid(
-              color: Colors.orange[900],
+              color: Colors.blue[900],
             ),
           );
         },

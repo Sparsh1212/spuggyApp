@@ -32,7 +32,7 @@ class _EditMemberState extends State<EditMember> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue[900],
         centerTitle: true,
         title: Text(
           'Edit Access',

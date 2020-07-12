@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
-import 'listproj.dart';
+
 import 'brain.dart';
+import 'mybottom.dart';
 
 var brainObj = Brain();
 
@@ -15,15 +16,19 @@ class Decider extends StatelessWidget {
             if (snapshot.hasData) {
               if (snapshot.data['token'] != '') {
                 if (snapshot.data['profile'][0]['isBlocked'] == true) {
-                  return Login(message: 'Access is blocked!');
+                  return Login(
+                    logout: false,
+                    blocked: true,
+                  );
                 }
-                return ListProjects(
+                return MyBottomNavigation(
                   token: snapshot.data['token'],
                   profile: snapshot.data['profile'],
                 );
               } else {
                 return Login(
-                  message: '',
+                  logout: false,
+                  blocked: false,
                 );
               }
             } else if (snapshot.hasError) {
@@ -32,7 +37,7 @@ class Decider extends StatelessWidget {
               );
             }
             return Scaffold(
-              backgroundColor: Colors.purple,
+              backgroundColor: Colors.blue[900],
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

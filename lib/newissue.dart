@@ -20,10 +20,12 @@ class _NewIssueState extends State<NewIssue> {
   final int projectId;
   _NewIssueState({this.token, this.projectId});
   var x = 'Bug';
+  var _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue[900],
         centerTitle: true,
         title: Text(
           'Raise Issue',
@@ -32,20 +34,26 @@ class _NewIssueState extends State<NewIssue> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.5,
+        child: Form(
+          key: _formKey,
+          //height: MediaQuery.of(context).size.height * 0.5,
           child: Column(
             children: [
-              TextField(
+              TextFormField(
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return 'Please add a title';
+                  }
+                },
                 controller: titleHandler,
-                decoration: textFieldDecoration,
+                decoration: textDecoration2,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
               TextField(
                 controller: descriptionHandler,
-                decoration: textFieldDecoration.copyWith(
+                decoration: textDecoration2.copyWith(
                     hintText: 'Description (Optional)',
                     prefixIcon: Icon(Icons.description)),
               ),
@@ -87,28 +95,28 @@ class _NewIssueState extends State<NewIssue> {
                   style: TextStyle(color: Colors.blue[700], fontSize: 20.0),
                 ),
                 onPressed: () async {
-                  var obj = {
-                    'issue_title': titleHandler.text,
-                    'issue_description': descriptionHandler.text,
-                    'issue_project': projectId,
-                    'issue_tag': x
-                  };
-                  var responseCode = await brainObj.raiseIssue(token, obj);
-                  if (responseCode == 201) {
-                    showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                              title: Text('Success'),
-                              content: Text('Issue Successfully Raised'),
-                            ));
-                  } else {
-                    showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                              title: Text('Something Went Wrong'),
-                              content: Text(
-                                  'Looks like you missed something important'),
-                            ));
+                  if (_formKey.currentState.validate()) {
+                    var obj = {
+                      'issue_title': titleHandler.text,
+                      'issue_description': descriptionHandler.text,
+                      'issue_project': projectId,
+                      'issue_tag': x
+                    };
+                    var responseCode = await brainObj.raiseIssue(token, obj);
+                    if (responseCode == 201) {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: Text('Success'),
+                                content: Text('Issue Successfully Raised'),
+                              ));
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: Text('Something Went Wrong'),
+                              ));
+                    }
                   }
                 },
               ),

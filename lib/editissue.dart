@@ -29,7 +29,10 @@ class _EditIssueState extends State<EditIssue> {
   @override
   void initState() {
     super.initState();
-    x = issue['status'];
+    x = issue['issue_status'];
+    if (issue['currently_assigned_to'] != 'No one') {
+      y = issue['assigned_to'];
+    }
   }
 
   @override
@@ -37,7 +40,7 @@ class _EditIssueState extends State<EditIssue> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.blue[700],
+        backgroundColor: Colors.blue[900],
         title: Text(
           'Edit Issue',
           style: whiteBold,
@@ -89,7 +92,6 @@ class _EditIssueState extends State<EditIssue> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return DropDownFormField(
-                      value: y,
                       onChanged: (value) {
                         setState(() {
                           y = value;
@@ -107,6 +109,7 @@ class _EditIssueState extends State<EditIssue> {
                                 'value': user['id']
                               })
                           .toList(),
+                      value: y,
                       textField: 'display',
                       valueField: 'value',
                     );

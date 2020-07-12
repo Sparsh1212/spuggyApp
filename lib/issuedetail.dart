@@ -37,7 +37,7 @@ class IssueDetail extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.blue[900],
         centerTitle: true,
         title: Text(
           'Issue Details',
@@ -52,7 +52,7 @@ class IssueDetail extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.95,
                 decoration: BoxDecoration(
-                  color: Colors.blue[700],
+                  color: Colors.grey[500],
                   borderRadius: BorderRadius.circular(5.0),
                 ),
                 child: Padding(
@@ -72,7 +72,7 @@ class IssueDetail extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.95,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [Colors.pink[300], Colors.red[300]]),
+                      colors: [Colors.grey[700], Colors.grey[700]]),
                   color: Colors.blue[700],
                   borderRadius: BorderRadius.circular(5.0),
                 ),
@@ -155,7 +155,7 @@ class IssueDetail extends StatelessWidget {
                     color: Colors.blue[700],
                     borderRadius: BorderRadius.circular(5.0),
                     gradient: LinearGradient(
-                        colors: [Colors.yellow[900], Colors.orange]),
+                        colors: [Colors.grey[700], Colors.grey[700]]),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),

@@ -41,7 +41,7 @@ class PopupButton {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: FlatButton(
-              color: Colors.purple,
+              color: Colors.blue[900],
               child: Text(
                 'Logout',
                 style: TextStyle(color: Colors.white),
@@ -52,7 +52,8 @@ class PopupButton {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Login(
-                              message: 'Logout Successful!',
+                              logout: true,
+                              blocked: false,
                             )));
               },
             ),

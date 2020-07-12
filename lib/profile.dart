@@ -11,7 +11,7 @@ class Profile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.teal[400],
+        backgroundColor: Colors.blue[900],
         title: Text('My Profile', style: whiteBold),
       ),
       body: Column(
@@ -22,7 +22,7 @@ class Profile extends StatelessWidget {
             overflow: Overflow.visible,
             children: [
               Container(
-                color: Colors.teal[600],
+                color: Colors.blue[800],
                 height: MediaQuery.of(context).size.height * 0.2,
                 width: MediaQuery.of(context).size.width,
               ),

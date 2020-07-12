@@ -15,6 +15,21 @@ var textFieldDecoration = InputDecoration(
   fillColor: Colors.grey[300],
 );
 
+var textDecoration2 = InputDecoration(
+  hintText: 'Enter the title',
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.transparent),
+    borderRadius: BorderRadius.all(Radius.circular(2.0)),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.green),
+    borderRadius: BorderRadius.all(Radius.circular(2.0)),
+  ),
+  prefixIcon: Icon(Icons.title),
+  filled: true,
+  fillColor: Colors.grey[300],
+);
+
 var whiteBold =
     TextStyle(color: Colors.white, fontFamily: 'Galada', fontSize: 30.0);
 

@@ -12,6 +12,8 @@ class Comments extends StatelessWidget {
   Comments(
       {@required this.token, @required this.issueId, @required this.issue});
 
+  var _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,7 @@ class Comments extends StatelessWidget {
           'Comments',
           style: whiteBold,
         ),
-        backgroundColor: Colors.brown,
+        backgroundColor: Colors.blue[900],
       ),
       body: FutureBuilder(
         future: brainObj.fetchComments(token, issueId),
@@ -81,41 +83,51 @@ class Comments extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 8,
-                          child: TextField(
-                            controller: commentTextHandler,
-                            decoration: textFieldDecoration.copyWith(
-                                hintText: 'Add a comment',
-                                prefixIcon: Icon(Icons.tag_faces),
-                                fillColor: Colors.grey[200]),
+                          child: Form(
+                            key: _formKey,
+                            child: TextFormField(
+                              validator: (String value) {
+                                if (value.isEmpty) {
+                                  return 'Please Enter some text';
+                                }
+                              },
+                              controller: commentTextHandler,
+                              decoration: textDecoration2.copyWith(
+                                  hintText: 'Add a comment',
+                                  prefixIcon: Icon(Icons.tag_faces),
+                                  fillColor: Colors.grey[200]),
+                            ),
                           ),
                         ),
                         Expanded(
                           child: IconButton(
                               icon: Icon(Icons.send),
                               onPressed: () async {
-                                var obj = {
-                                  'comment_project': issue['issue_project'],
-                                  'comment_issue': issue['id'],
-                                  'comment_text': commentTextHandler.text
-                                };
-                                var responseCode =
-                                    await brainObj.addComment(token, obj);
-                                if (responseCode == 201) {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                            title: Text('Success'),
-                                            content: Text(
-                                                'Comment successfully added'),
-                                          ));
-                                } else {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                            title: Text('Oops'),
-                                            content: Text(
-                                                'Sorry, something went wrong'),
-                                          ));
+                                if (_formKey.currentState.validate()) {
+                                  var obj = {
+                                    'comment_project': issue['issue_project'],
+                                    'comment_issue': issue['id'],
+                                    'comment_text': commentTextHandler.text
+                                  };
+                                  var responseCode =
+                                      await brainObj.addComment(token, obj);
+                                  if (responseCode == 201) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              title: Text('Success'),
+                                              content: Text(
+                                                  'Comment successfully added'),
+                                            ));
+                                  } else {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              title: Text('Oops'),
+                                              content: Text(
+                                                  'Sorry, something went wrong'),
+                                            ));
+                                  }
                                 }
                               }),
                         ),

@@ -27,20 +27,30 @@ class ListIssues extends StatelessWidget {
           'All Issues',
           style: whiteBold,
         ),
-        backgroundColor: Colors.pink[400],
+        backgroundColor: Colors.blue[900],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
           Icons.add_circle_outline,
           size: 50.0,
         ),
-        backgroundColor: Colors.pink,
+        backgroundColor: Colors.blue[900],
         onPressed: () {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      NewIssue(token: token, projectId: projectId)));
+                      NewIssue(token: token, projectId: projectId))).then((v) {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ListIssues(
+                          token: token,
+                          projectId: project['id'],
+                          project: project,
+                          profile: profile,
+                        )));
+          });
         },
       ),
       body: FutureBuilder(
@@ -62,19 +72,29 @@ class ListIssues extends StatelessWidget {
                                       issue: snapshot.data[index],
                                       project: project,
                                       profile: profile,
-                                    )));
+                                    ))).then((v) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ListIssues(
+                                        token: token,
+                                        projectId: project['id'],
+                                        project: project,
+                                        profile: profile,
+                                      )));
+                        });
                       },
                       child: Container(
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                  color: Colors.red[900],
+                                  color: Colors.blue[900],
                                   blurRadius: 6.0,
                                   offset: Offset(1, 5)),
                             ],
                             borderRadius: BorderRadius.circular(15.0),
                             gradient: LinearGradient(
-                              colors: [Colors.pink[300], Colors.red[300]],
+                              colors: [Colors.blue[300], Colors.blue[800]],
                             )),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,50 +113,44 @@ class ListIssues extends StatelessWidget {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 0.0),
+                                  horizontal: 10.0, vertical: 0.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  RawMaterialButton(
-                                    onPressed: () {},
-                                    elevation: 2.0,
-                                    fillColor: Colors.white,
-                                    child: Icon(
-                                      Icons.report,
-                                      size: 30.0,
-                                    ),
-                                    shape: CircleBorder(),
+                                  Icon(
+                                    Icons.report,
+                                    size: 20.0,
+                                    color: Colors.white,
                                   ),
+                                  SizedBox(width: 8.0),
                                   Text(snapshot.data[index]['issue_status'],
                                       style: TextStyle(
                                           fontStyle: FontStyle.italic,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
-                                          fontSize: 17.0)),
+                                          fontSize: 15.0)),
                                 ],
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  RawMaterialButton(
-                                    onPressed: () {},
-                                    elevation: 2.0,
-                                    fillColor: Colors.white,
-                                    child: Icon(
-                                      Icons.person,
-                                      size: 30.0,
-                                    ),
-                                    shape: CircleBorder(),
+                                  Icon(
+                                    Icons.person,
+                                    size: 20.0,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 8.0,
                                   ),
                                   Text(snapshot.data[index]['created_by'],
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontStyle: FontStyle.italic,
-                                          fontSize: 17.0)),
+                                          fontSize: 15.0)),
                                 ],
                               ),
                             ),
@@ -153,7 +167,7 @@ class ListIssues extends StatelessWidget {
           }
           return Center(
             child: SpinKitFadingGrid(
-              color: Colors.pink[600],
+              color: Colors.blue[900],
             ),
           );
         },

@@ -28,7 +28,7 @@ class ListProjects extends StatelessWidget {
           'All Projects',
           style: whiteBold,
         ),
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.blue[900],
         actions: [popupObj.popupList(profile)],
       ),
       body: FutureBuilder(
@@ -61,13 +61,13 @@ class ListProjects extends StatelessWidget {
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                                color: Colors.purple[900],
+                                color: Colors.blue[900],
                                 blurRadius: 6.0,
                                 offset: Offset(1, 5)),
                           ],
                           borderRadius: BorderRadius.circular(15.0),
                           gradient: LinearGradient(
-                            colors: [Colors.purple[200], Colors.purple[800]],
+                            colors: [Colors.blue[300], Colors.blue[800]],
                           ),
                           color: Colors.green,
                         ),
@@ -94,7 +94,7 @@ class ListProjects extends StatelessWidget {
                               child: Text(
                                 'TESTING PROCEDURE',
                                 style: TextStyle(
-                                    color: Colors.pink[100],
+                                    color: Colors.white,
                                     fontSize: 15.0,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -106,7 +106,7 @@ class ListProjects extends StatelessWidget {
                                 data: project['testing_procedure'],
                                 style: {
                                   "html":
-                                      Style(backgroundColor: Colors.pink[100]),
+                                      Style(backgroundColor: Colors.grey[300]),
                                 },
                               ),
                             ),
@@ -127,13 +127,11 @@ class ListProjects extends StatelessWidget {
           }
           return Center(
             child: SpinKitFadingGrid(
-              color: Colors.purple[900],
+              color: Colors.blue[900],
             ),
           );
         },
       ),
-      bottomNavigationBar: bottomNavObj.bottomNavigator(
-          token, profile, 0, context, Colors.purple[700]),
     );
   }
 }
