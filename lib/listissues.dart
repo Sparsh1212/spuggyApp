@@ -6,9 +6,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'newissue.dart';
 import 'common.dart';
 
-class ListIssues extends StatelessWidget {
+class ListIssues extends StatefulWidget {
   final project; // new
-  final brainObj = Brain();
   final int projectId;
   final String token;
   final profile;
@@ -17,6 +16,13 @@ class ListIssues extends StatelessWidget {
       @required this.projectId,
       @required this.project, // new
       @required this.profile});
+
+  @override
+  _ListIssuesState createState() => _ListIssuesState();
+}
+
+class _ListIssuesState extends State<ListIssues> {
+  final brainObj = Brain();
 
   @override
   Widget build(BuildContext context) {
@@ -39,22 +45,15 @@ class ListIssues extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      NewIssue(token: token, projectId: projectId))).then((v) {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ListIssues(
-                          token: token,
-                          projectId: project['id'],
-                          project: project,
-                          profile: profile,
-                        )));
+                  builder: (context) => NewIssue(
+                      token: widget.token,
+                      projectId: widget.projectId))).then((v) {
+            setState(() {});
           });
         },
       ),
       body: FutureBuilder(
-        future: brainObj.fetchIssues(token, projectId),
+        future: brainObj.fetchIssues(widget.token, widget.projectId),
         builder: (context, snapshot) {
           if (snapshot.hasData == true) {
             return ListView.builder(
@@ -68,20 +67,12 @@ class ListIssues extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => IssueDetail(
-                                      token: token,
+                                      token: widget.token,
                                       issue: snapshot.data[index],
-                                      project: project,
-                                      profile: profile,
-                                    ))).then((v) {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ListIssues(
-                                        token: token,
-                                        projectId: project['id'],
-                                        project: project,
-                                        profile: profile,
-                                      )));
+                                      project: widget.project,
+                                      profile: widget.profile,
+                                    ))).then((d) {
+                          setState(() {});
                         });
                       },
                       child: Container(

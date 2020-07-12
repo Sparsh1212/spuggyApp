@@ -110,6 +110,8 @@ class _NewIssueState extends State<NewIssue> {
                                 title: Text('Success'),
                                 content: Text('Issue Successfully Raised'),
                               ));
+                      titleHandler.clear();
+                      descriptionHandler.clear();
                     } else {
                       showDialog(
                           context: context,

@@ -4,7 +4,7 @@ import 'comments.dart';
 import 'editissue.dart';
 import 'common.dart';
 
-class IssueDetail extends StatelessWidget {
+class IssueDetail extends StatefulWidget {
   final dynamic project;
   final String token;
   final dynamic issue;
@@ -16,18 +16,24 @@ class IssueDetail extends StatelessWidget {
       @required this.profile});
 
   @override
+  _IssueDetailState createState() => _IssueDetailState();
+}
+
+class _IssueDetailState extends State<IssueDetail> {
+  @override
   Widget build(BuildContext context) {
     bool checkIfEditAllowed() {
-      if (project == null) {
+      if (widget.project == null) {
         return false;
       }
-      if (profile[0]['status'] == 'Admin') {
+      if (widget.profile[0]['status'] == 'Admin') {
         return true;
-      } else if (project['created_by'] == profile[0]['username']) {
+      } else if (widget.project['created_by'] ==
+          widget.profile[0]['username']) {
         return true;
       }
-      for (int i = 0; i < project['team_members'].length; i++) {
-        if (project['team_members'][i] == profile[0]['user']) {
+      for (int i = 0; i < widget.project['team_members'].length; i++) {
+        if (widget.project['team_members'][i] == widget.profile[0]['user']) {
           return true;
         }
       }
@@ -58,7 +64,7 @@ class IssueDetail extends StatelessWidget {
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
-                  child: Text(issue['issue_title'],
+                  child: Text(widget.issue['issue_title'],
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
@@ -92,7 +98,7 @@ class IssueDetail extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 12.0),
                           child: Text(
-                            issue['issue_description'],
+                            widget.issue['issue_description'],
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 15.0,
@@ -115,7 +121,7 @@ class IssueDetail extends StatelessWidget {
                                     width: 10.0,
                                   ),
                                   Text(
-                                    issue['issue_tag'],
+                                    widget.issue['issue_tag'],
                                     style: TextStyle(
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.bold,
@@ -133,7 +139,7 @@ class IssueDetail extends StatelessWidget {
                                   SizedBox(
                                     width: 10.0,
                                   ),
-                                  Text(issue['issue_status'],
+                                  Text(widget.issue['issue_status'],
                                       style: TextStyle(
                                           fontSize: 20.0,
                                           fontWeight: FontWeight.bold,
@@ -182,7 +188,7 @@ class IssueDetail extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                                   SizedBox(width: 5.0),
-                                  Text(issue['created_by'],
+                                  Text(widget.issue['created_by'],
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold)),
@@ -210,7 +216,7 @@ class IssueDetail extends StatelessWidget {
                                     width: 5.0,
                                   ),
                                   Text(
-                                    issue['currently_assigned_to'],
+                                    widget.issue['currently_assigned_to'],
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -243,9 +249,9 @@ class IssueDetail extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => EditIssue(
-                                      token: token,
-                                      issue: issue,
-                                      project: project,
+                                      token: widget.token,
+                                      issue: widget.issue,
+                                      project: widget.project,
                                     )));
                       },
                     ),
@@ -269,9 +275,9 @@ class IssueDetail extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => Comments(
-                                    token: token,
-                                    issueId: issue['id'],
-                                    issue: issue,
+                                    token: widget.token,
+                                    issueId: widget.issue['id'],
+                                    issue: widget.issue,
                                   )));
                     },
                   )

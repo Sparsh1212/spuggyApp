@@ -74,6 +74,7 @@ class Brain {
     dynamic targetCommentsList = allComments
         .where((comment) => comment['comment_issue'] == issueId)
         .toList();
+
     return targetCommentsList;
   }
 

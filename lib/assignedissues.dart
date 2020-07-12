@@ -199,6 +199,7 @@ class _AssignedIssuesState extends State<AssignedIssues> {
                                                   content: Text(
                                                       'Status Successfully Updated'),
                                                 ));
+                                        setState(() {});
                                       } else {
                                         showDialog(
                                             context: context,

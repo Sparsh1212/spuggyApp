@@ -8,18 +8,26 @@ import 'popupButton.dart';
 import 'membersearch.dart';
 import 'common.dart';
 
-class Members extends StatelessWidget {
-  final popupObj = PopupButton();
-  final bottomNavObj = BottomNavigator();
-  final brainObj = Brain();
+class Members extends StatefulWidget {
   final String token;
   final dynamic profile;
   Members({@required this.token, @required this.profile});
 
   @override
+  _MembersState createState() => _MembersState();
+}
+
+class _MembersState extends State<Members> {
+  final popupObj = PopupButton();
+
+  final bottomNavObj = BottomNavigator();
+
+  final brainObj = Brain();
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: brainObj.fetchProfiles(token),
+      future: brainObj.fetchProfiles(widget.token),
       builder: (context, snapshot) {
         return Scaffold(
             appBar: AppBar(
@@ -35,10 +43,11 @@ class Members extends StatelessWidget {
                             showSearch(
                                 context: context,
                                 delegate: MemberSearch(
-                                    token: token, membersList: snapshot.data));
+                                    token: widget.token,
+                                    membersList: snapshot.data));
                           }
                         : null),
-                popupObj.popupList(profile)
+                popupObj.popupList(widget.profile)
               ],
             ),
             body: snapshot.hasData
@@ -54,9 +63,11 @@ class Members extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => EditMember(
-                                          token: token,
+                                          token: widget.token,
                                           member: snapshot.data[index],
-                                        )));
+                                        ))).then((ea) {
+                              setState(() {});
+                            });
                           },
                           child: Container(
                             decoration: BoxDecoration(
