@@ -4,10 +4,10 @@ import 'brain.dart';
 import 'issuedetail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
-import 'bottomnavigator.dart';
+
 import 'popupButton.dart';
 
-final bottomNavObj = BottomNavigator();
+
 final popupObj = PopupButton();
 
 class AssignedIssues extends StatefulWidget {

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'brain.dart';
 import 'issuedetail.dart';
-import 'bottomnavigator.dart';
+
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'popupButton.dart';
 import 'common.dart';
 
 class MyCreatedIssues extends StatelessWidget {
-  final bottomNavObj = BottomNavigator();
   final popupObj = PopupButton();
   final brainObj = Brain();
   final String token;

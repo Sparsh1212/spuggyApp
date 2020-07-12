@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'brain.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'editmember.dart';
-import 'bottomnavigator.dart';
+
 import 'popupButton.dart';
 import 'membersearch.dart';
 import 'common.dart';
@@ -20,7 +20,7 @@ class Members extends StatefulWidget {
 class _MembersState extends State<Members> {
   final popupObj = PopupButton();
 
-  final bottomNavObj = BottomNavigator();
+
 
   final brainObj = Brain();
 
