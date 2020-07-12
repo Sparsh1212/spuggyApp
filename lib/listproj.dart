@@ -6,12 +6,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'popupButton.dart';
-import 'bottomnavigator.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'common.dart';
 
 class ListProjects extends StatelessWidget {
-  final bottomNavObj = BottomNavigator();
   final brainObj = Brain();
   final String token;
   final dynamic profile;
