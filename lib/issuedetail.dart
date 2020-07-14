@@ -282,6 +282,7 @@ class _IssueDetailState extends State<IssueDetail> {
                                     token: widget.token,
                                     issueId: widget.issue['id'],
                                     issue: widget.issue,
+                                    profile: widget.profile,
                                   )));
                     },
                   )

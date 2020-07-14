@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:spuggyflutter/editissue.dart';
+
 import 'brain.dart';
 import 'issuedetail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
