@@ -174,7 +174,7 @@ class _IssueDetailState extends State<IssueDetail> {
                               Text(
                                 'Creator',
                                 style: TextStyle(
-                                    fontSize: 25.0,
+                                    fontSize: 20.0,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -200,7 +200,7 @@ class _IssueDetailState extends State<IssueDetail> {
                             children: [
                               Text('Assigned To',
                                   style: TextStyle(
-                                      fontSize: 25.0,
+                                      fontSize: 20.0,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold)),
                               SizedBox(
@@ -242,7 +242,7 @@ class _IssueDetailState extends State<IssueDetail> {
                           side: BorderSide(color: Colors.green)),
                       child: Text(
                         'Edit',
-                        style: TextStyle(color: Colors.green, fontSize: 22.0),
+                        style: TextStyle(color: Colors.green, fontSize: 18.0),
                       ),
                       onPressed: () {
                         Navigator.push(
@@ -268,7 +268,7 @@ class _IssueDetailState extends State<IssueDetail> {
                         side: BorderSide(color: Colors.red)),
                     child: Text(
                       'Comments',
-                      style: TextStyle(color: Colors.red, fontSize: 22.0),
+                      style: TextStyle(color: Colors.red, fontSize: 18.0),
                     ),
                     onPressed: () {
                       Navigator.push(

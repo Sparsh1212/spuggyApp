@@ -167,7 +167,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               'Login',
                               style: TextStyle(
-                                  color: Colors.blue[900], fontSize: 20.0),
+                                  color: Colors.blue[900], fontSize: 15.0),
                             ),
                             onPressed: () async {
                               Scaffold.of(context)
@@ -216,7 +216,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               'Omniport Login',
                               style: TextStyle(
-                                  color: Colors.purple, fontSize: 20.0),
+                                  color: Colors.purple, fontSize: 15.0),
                             ),
                             onPressed: () {
                               Navigator.push(
