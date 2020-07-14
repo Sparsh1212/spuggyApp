@@ -13,6 +13,7 @@ class NewIssue extends StatefulWidget {
 }
 
 class _NewIssueState extends State<NewIssue> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   var brainObj = Brain();
   var titleHandler = TextEditingController();
   var descriptionHandler = TextEditingController();
@@ -21,9 +22,21 @@ class _NewIssueState extends State<NewIssue> {
   _NewIssueState({this.token, this.projectId});
   var x = 'Bug';
   var _formKey = GlobalKey<FormState>();
+  final newIssueFailure = SnackBar(
+    duration: const Duration(seconds: 3),
+    content: Row(
+      children: [
+        Text(
+          'Something went wrong. ',
+          style: TextStyle(fontSize: 15.0),
+        )
+      ],
+    ),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.blue[900],
         centerTitle: true,
@@ -104,20 +117,9 @@ class _NewIssueState extends State<NewIssue> {
                     };
                     var responseCode = await brainObj.raiseIssue(token, obj);
                     if (responseCode == 201) {
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: Text('Success'),
-                                content: Text('Issue Successfully Raised'),
-                              ));
-                      titleHandler.clear();
-                      descriptionHandler.clear();
+                      Navigator.pop(context, true);
                     } else {
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: Text('Something Went Wrong'),
-                              ));
+                      _scaffoldKey.currentState.showSnackBar(newIssueFailure);
                     }
                   }
                 },

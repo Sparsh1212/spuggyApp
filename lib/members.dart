@@ -18,11 +18,22 @@ class Members extends StatefulWidget {
 }
 
 class _MembersState extends State<Members> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final popupObj = PopupButton();
 
-
-
   final brainObj = Brain();
+
+  final editMember = SnackBar(
+    duration: const Duration(seconds: 2),
+    content: Row(
+      children: [
+        Text(
+          'Member Permissions Updated',
+          style: TextStyle(fontSize: 15.0),
+        )
+      ],
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +41,7 @@ class _MembersState extends State<Members> {
       future: brainObj.fetchProfiles(widget.token),
       builder: (context, snapshot) {
         return Scaffold(
+            key: _scaffoldKey,
             appBar: AppBar(
               centerTitle: true,
               automaticallyImplyLeading: false,
@@ -67,6 +79,10 @@ class _MembersState extends State<Members> {
                                           member: snapshot.data[index],
                                         ))).then((ea) {
                               setState(() {});
+                              if (ea) {
+                                _scaffoldKey.currentState
+                                    .showSnackBar(editMember);
+                              }
                             });
                           },
                           child: Container(

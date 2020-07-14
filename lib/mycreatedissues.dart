@@ -34,7 +34,8 @@ class MyCreatedIssues extends StatelessWidget {
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 8.0),
                     child: InkWell(
                       onTap: () {
                         Navigator.push(
@@ -52,8 +53,8 @@ class MyCreatedIssues extends StatelessWidget {
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.blue[900],
-                                  blurRadius: 6.0,
-                                  offset: Offset(1, 5)),
+                                  blurRadius: 3.0,
+                                  offset: Offset(1, 3)),
                             ],
                             borderRadius: BorderRadius.circular(15.0),
                             gradient: LinearGradient(

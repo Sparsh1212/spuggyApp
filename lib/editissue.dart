@@ -18,6 +18,7 @@ class EditIssue extends StatefulWidget {
 }
 
 class _EditIssueState extends State<EditIssue> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   var membersList = [];
   var x = 'Created';
   var y;
@@ -26,6 +27,17 @@ class _EditIssueState extends State<EditIssue> {
   final String token;
   _EditIssueState(
       {@required this.issue, @required this.token, @required this.project});
+  final issueUpdateFailure = SnackBar(
+    duration: const Duration(seconds: 3),
+    content: Row(
+      children: [
+        Text(
+          'Something went wrong.',
+          style: TextStyle(fontSize: 15.0),
+        )
+      ],
+    ),
+  );
   @override
   void initState() {
     super.initState();
@@ -38,6 +50,7 @@ class _EditIssueState extends State<EditIssue> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.blue[900],
@@ -148,20 +161,10 @@ class _EditIssueState extends State<EditIssue> {
                         var responseCode =
                             await brainObj.updateIssue(token, obj, issue['id']);
                         if (responseCode == 200) {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: Text('Success'),
-                                    content: Text('Issue Successfully Updated'),
-                                  ));
+                          Navigator.pop(context, true);
                         } else {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: Text('Oops'),
-                                    content:
-                                        Text('Sorry, something went wrong'),
-                                  ));
+                          _scaffoldKey.currentState
+                              .showSnackBar(issueUpdateFailure);
                         }
                       }),
                   FlatButton(
@@ -172,19 +175,10 @@ class _EditIssueState extends State<EditIssue> {
                       var responseCode =
                           await brainObj.deleteIssue(token, issue['id']);
                       if (responseCode == 204) {
-                        showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: Text('Success'),
-                                  content: Text('Issue Successfully Deleted'),
-                                ));
+                        Navigator.pop(context, true);
                       } else {
-                        showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: Text('Oops'),
-                                  content: Text('Sorry, something went wrong'),
-                                ));
+                        _scaffoldKey.currentState
+                            .showSnackBar(issueUpdateFailure);
                       }
                     },
                     child: Text(

@@ -14,12 +14,25 @@ class EditMember extends StatefulWidget {
 }
 
 class _EditMemberState extends State<EditMember> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   var brainObj = Brain();
   final String token;
   final dynamic member;
   bool x = false;
   var y = 'Normal';
   _EditMemberState({@required this.token, @required this.member});
+
+  final updateFailure = SnackBar(
+    duration: const Duration(seconds: 2),
+    content: Row(
+      children: [
+        Text(
+          'Something went wrong. ',
+          style: TextStyle(fontSize: 15.0),
+        )
+      ],
+    ),
+  );
   @override
   void initState() {
     super.initState();
@@ -31,6 +44,7 @@ class _EditMemberState extends State<EditMember> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.blue[900],
         centerTitle: true,
@@ -125,20 +139,9 @@ class _EditMemberState extends State<EditMember> {
                     var responseCode = await brainObj.updateMemberAccess(
                         token, obj, member['id']);
                     if (responseCode == 200) {
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: Text('Success'),
-                                content: Text(
-                                    'Member Permissions Successfully Updated'),
-                              ));
+                      Navigator.pop(context, true);
                     } else {
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: Text('Oops'),
-                                content: Text('Something Went Wrong'),
-                              ));
+                      _scaffoldKey.currentState.showSnackBar(updateFailure);
                     }
                   },
                 ),

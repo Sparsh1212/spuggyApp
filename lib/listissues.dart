@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:spuggyflutter/editissue.dart';
 import 'brain.dart';
 import 'issuedetail.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,11 +23,36 @@ class ListIssues extends StatefulWidget {
 }
 
 class _ListIssuesState extends State<ListIssues> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final brainObj = Brain();
+  final newIssueSuccess = SnackBar(
+    duration: const Duration(seconds: 2),
+    content: Row(
+      children: [
+        Text(
+          'Issue Successfully Raised',
+          style: TextStyle(fontSize: 15.0),
+        )
+      ],
+    ),
+  );
+
+  final editIssue = SnackBar(
+    duration: const Duration(seconds: 2),
+    content: Row(
+      children: [
+        Text(
+          'Issue updated',
+          style: TextStyle(fontSize: 15.0),
+        )
+      ],
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -49,6 +75,10 @@ class _ListIssuesState extends State<ListIssues> {
                       token: widget.token,
                       projectId: widget.projectId))).then((v) {
             setState(() {});
+            if (v) {
+              _scaffoldKey.currentState.showSnackBar(newIssueSuccess);
+            }
+            //print('snack called');
           });
         },
       ),
@@ -60,7 +90,8 @@ class _ListIssuesState extends State<ListIssues> {
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 8.0),
                     child: InkWell(
                       onTap: () {
                         Navigator.push(
@@ -73,6 +104,9 @@ class _ListIssuesState extends State<ListIssues> {
                                       profile: widget.profile,
                                     ))).then((d) {
                           setState(() {});
+                          if (d) {
+                            _scaffoldKey.currentState.showSnackBar(editIssue);
+                          }
                         });
                       },
                       child: Container(
@@ -80,8 +114,8 @@ class _ListIssuesState extends State<ListIssues> {
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.blue[900],
-                                  blurRadius: 6.0,
-                                  offset: Offset(1, 5)),
+                                  blurRadius: 3.0,
+                                  offset: Offset(1, 3)),
                             ],
                             borderRadius: BorderRadius.circular(15.0),
                             gradient: LinearGradient(

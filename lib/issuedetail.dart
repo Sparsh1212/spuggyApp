@@ -252,7 +252,11 @@ class _IssueDetailState extends State<IssueDetail> {
                                       token: widget.token,
                                       issue: widget.issue,
                                       project: widget.project,
-                                    )));
+                                    ))).then((e) {
+                          if (e) {
+                            Navigator.pop(context, true);
+                          }
+                        });
                       },
                     ),
                   ),

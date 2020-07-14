@@ -134,6 +134,7 @@ class _CommentsState extends State<Comments> {
                                       await brainObj.addComment(token, obj);
                                   if (responseCode == 201) {
                                     commentTextHandler.clear();
+
                                     setState(() {});
                                   } else {
                                     showDialog(

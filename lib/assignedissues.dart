@@ -7,7 +7,6 @@ import 'package:dropdown_formfield/dropdown_formfield.dart';
 
 import 'popupButton.dart';
 
-
 final popupObj = PopupButton();
 
 class AssignedIssues extends StatefulWidget {
@@ -21,15 +20,40 @@ class AssignedIssues extends StatefulWidget {
 }
 
 class _AssignedIssuesState extends State<AssignedIssues> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final String token;
   final dynamic profile;
   _AssignedIssuesState({@required this.token, @required this.profile});
   final brainObj = Brain();
   var x = 'Assigned';
+  final editIssue = SnackBar(
+    duration: const Duration(seconds: 2),
+    content: Row(
+      children: [
+        Text(
+          'Issue updated',
+          style: TextStyle(fontSize: 15.0),
+        )
+      ],
+    ),
+  );
+
+  final updateFailure = SnackBar(
+    duration: const Duration(seconds: 2),
+    content: Row(
+      children: [
+        Text(
+          'Something went wrong. ',
+          style: TextStyle(fontSize: 15.0),
+        )
+      ],
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -48,7 +72,8 @@ class _AssignedIssuesState extends State<AssignedIssues> {
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0, vertical: 8.0),
                   child: InkWell(
                     onTap: () {
                       Navigator.push(
@@ -66,8 +91,8 @@ class _AssignedIssuesState extends State<AssignedIssues> {
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.blue[900],
-                                blurRadius: 6.0,
-                                offset: Offset(1, 5)),
+                                blurRadius: 3.0,
+                                offset: Offset(1, 3)),
                           ],
                           borderRadius: BorderRadius.circular(15.0),
                           gradient: LinearGradient(
@@ -192,22 +217,12 @@ class _AssignedIssuesState extends State<AssignedIssues> {
                                           await brainObj.updateIssue(token, obj,
                                               snapshot.data[index]['id']);
                                       if (responseCode == 200) {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                                  title: Text('Success'),
-                                                  content: Text(
-                                                      'Status Successfully Updated'),
-                                                ));
                                         setState(() {});
+                                        _scaffoldKey.currentState
+                                            .showSnackBar(editIssue);
                                       } else {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) => AlertDialog(
-                                                  title: Text('Oops'),
-                                                  content: Text(
-                                                      'Sorry, something went wrong'),
-                                                ));
+                                        _scaffoldKey.currentState
+                                            .showSnackBar(updateFailure);
                                       }
                                     },
                                   ),
