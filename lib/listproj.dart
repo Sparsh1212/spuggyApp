@@ -101,12 +101,23 @@ class ListProjects extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10.0, vertical: 20.0),
-                              child: Html(
-                                data: project['testing_procedure'],
-                                style: {
-                                  "html":
-                                      Style(backgroundColor: Colors.grey[300]),
-                                },
+                              child: Center(
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.76,
+
+                                  height: MediaQuery.of(context).size.height *
+                                      0.41, // new
+                                  child: SingleChildScrollView(
+                                    child: Html(
+                                      data: project['testing_procedure'],
+                                      style: {
+                                        "html": Style(
+                                            backgroundColor: Colors.grey[300]),
+                                      },
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ],
