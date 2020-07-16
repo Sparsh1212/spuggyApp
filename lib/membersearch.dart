@@ -35,6 +35,15 @@ class MemberSearch extends SearchDelegate {
         .where((member) =>
             member['name'].toLowerCase().contains(query.toLowerCase()))
         .toList();
+    if (resultsList.length == 0) {
+      return Center(
+        child: Text(
+          'No results',
+          style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+        ),
+      );
+    }
+
     return ListView.builder(
         itemCount: resultsList.length,
         itemBuilder: (context, index) {
@@ -153,6 +162,14 @@ class MemberSearch extends SearchDelegate {
         .toList();
     if (query == '') {
       return Text('');
+    }
+    if (displayList.length == 0) {
+      return Center(
+        child: Text(
+          'No results',
+          style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+        ),
+      );
     }
     return ListView.builder(
         itemCount: displayList.length,
